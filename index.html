@@ -3,478 +3,947 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ритин уголок 💙</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Rita's Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --blue: #1565C0;
-  --blue-dark: #0D47A1;
-  --blue-light: #42A5F5;
-  --sky: #90CAF9;
-  --gold: #FFD600;
-  --gold-dark: #F9A825;
-  --bg: #0a1628;
-  --card: #0f2040;
-  --card2: #162952;
-  --text: #e8f4ff;
-  --muted: #7aaddd;
+  --bg:      #0C0C10;
+  --surface: #13131A;
+  --panel:   #18181F;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text:    #D8D4CC;
+  --dim:     #6B6B7A;
+  --accent:  #5B8DEF;
+  --accent2: #E2A96B;
+  --owned:   #5B8DEF;
+  --danger:  #C0544A;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
 
-/* HEADER */
-header { text-align:center; padding:40px 20px 10px; }
-.header-title {
-  font-family:'Orbitron',monospace;
-  font-size:clamp(1.8rem,5vw,3rem); font-weight:900; color:var(--gold);
-  text-shadow:0 0 20px rgba(255,214,0,.5), 3px 3px 0 var(--gold-dark);
-  animation:glow 3s ease-in-out infinite;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
 }
-@keyframes glow {
-  0%,100% { text-shadow:0 0 20px rgba(255,214,0,.5),3px 3px 0 var(--gold-dark); }
-  50%      { text-shadow:0 0 35px rgba(255,214,0,.9),3px 3px 0 var(--gold-dark); }
+
+/* ── HEADER ─────────────────────────────── */
+.site-header {
+  padding: 40px 40px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
 }
-.header-sub { font-size:.9rem; color:var(--sky); letter-spacing:4px; text-transform:uppercase; margin-top:6px; opacity:.8; }
-.hh { display:inline-block; font-size:2rem; margin:0 6px; animation:bob 1.4s ease-in-out infinite; }
-.hh:last-child { animation-delay:.7s; }
-@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-.rings-row { display:flex; justify-content:center; gap:10px; margin:14px 0; }
-.ring { width:18px; height:18px; border:3px solid var(--gold); border-radius:50%; box-shadow:0 0 6px rgba(255,214,0,.5); animation:rspin 2s linear infinite; animation-delay:calc(var(--i)*.25s); }
-@keyframes rspin { to{transform:rotate(360deg)} }
 
-/* TABS */
-.tabs-wrapper { max-width:1060px; margin:20px auto 40px; padding:0 16px; }
-.tab-bar { display:flex; gap:4px; border-bottom:2px solid var(--blue); }
-.tab-btn {
-  font-family:'Orbitron',monospace; font-size:.7rem; font-weight:700; letter-spacing:1px;
-  text-transform:uppercase; padding:10px 22px; border:2px solid transparent; border-bottom:none;
-  border-radius:8px 8px 0 0; background:var(--card); color:var(--muted); cursor:pointer;
-  position:relative; top:2px; transition:all .2s;
+.site-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
-.tab-btn:hover { color:var(--sky); background:var(--card2); }
-.tab-btn.active { background:var(--card2); color:var(--gold); border-color:var(--blue); border-bottom-color:var(--card2); }
-.tab-content { background:var(--card2); border:2px solid var(--blue); border-top:none; border-radius:0 10px 10px 10px; padding:26px; min-height:480px; }
-.tab-panel { display:none; }
-.tab-panel.active { display:block; animation:fadeIn .3s ease; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 
-/* HOME */
-.home-inner { display:flex; flex-direction:column; align-items:center; gap:18px; padding:16px 0; text-align:center; }
-.avatar {
-  width:100px; height:100px; border-radius:50%;
-  background:linear-gradient(135deg,var(--blue),var(--blue-dark));
-  border:3px solid var(--gold); display:flex; align-items:center; justify-content:center;
-  font-size:3.5rem; box-shadow:0 0 24px rgba(255,214,0,.3);
-  animation:float 3.5s ease-in-out infinite;
+.site-title span {
+  color: var(--accent);
 }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-.welcome { font-family:'Orbitron',monospace; font-size:clamp(1.1rem,3.5vw,1.8rem); font-weight:900; color:var(--gold); }
-.home-desc { color:var(--sky); font-size:.95rem; max-width:400px; line-height:1.7; }
-.badges { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
-.badge { padding:5px 14px; border-radius:999px; font-size:.75rem; font-weight:700; border:1.5px solid; }
-.b-gold { border-color:var(--gold);       color:var(--gold);       background:rgba(255,214,0,.07); }
-.b-blue { border-color:var(--blue-light); color:var(--blue-light); background:rgba(66,165,245,.08); }
-.b-red  { border-color:#e53935;           color:#ef9a9a;           background:rgba(229,57,53,.07); }
-.fact-box { background:rgba(10,22,40,.7); border:1px solid rgba(21,101,192,.4); border-left:3px solid var(--gold); border-radius:8px; padding:12px 18px; font-size:.88rem; max-width:480px; line-height:1.6; }
-.ring-score { font-family:'Orbitron',monospace; font-size:.8rem; color:var(--gold); display:flex; align-items:center; gap:6px; }
 
-/* STATS BAR */
-.stats-bar { display:flex; align-items:center; gap:14px; margin-bottom:22px; padding:12px 16px; background:rgba(10,22,40,.6); border-radius:10px; border:1px solid rgba(21,101,192,.3); }
-.st { text-align:center; }
-.st-n { font-family:'Orbitron',monospace; font-size:1.3rem; font-weight:900; color:var(--gold); }
-.st-l { font-size:.6rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
-.bar-wrap { flex:1; background:rgba(21,101,192,.15); border-radius:999px; height:8px; overflow:hidden; }
-.bar-fill { height:100%; background:linear-gradient(90deg,var(--blue-light),var(--gold)); border-radius:999px; transition:width .5s; }
-
-/* SECTION HEADING */
-.sec-title { font-family:'Orbitron',monospace; font-size:.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--blue-light); margin:26px 0 12px; padding-left:10px; border-left:3px solid var(--gold); }
-.sec-title:first-of-type { margin-top:0; }
-
-/* GAME CARDS */
-.games-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:10px; }
-
-.game-card {
-  border-radius:10px; border:2px solid rgba(21,101,192,.3); background:rgba(10,22,40,.55);
-  cursor:pointer; overflow:hidden; display:flex; flex-direction:column;
-  transition:border-color .2s, transform .2s, box-shadow .2s; position:relative;
+.site-sub {
+  font-family: 'Syne', sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 6px;
 }
-.game-card:hover { border-color:var(--blue-light); transform:translateY(-3px); box-shadow:0 8px 20px rgba(21,101,192,.22); }
-.game-card.owned { border-color:rgba(255,214,0,.6); box-shadow:0 0 14px rgba(255,214,0,.12); }
 
-.cover-wrap { width:100%; aspect-ratio:3/4; overflow:hidden; background:#081022; flex-shrink:0; position:relative; }
-.cover-img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
-.game-card:hover .cover-img { transform:scale(1.06); }
-
-/* Placeholder covers — unique color per era */
-.cover-ph {
-  width:100%; height:100%; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:6px;
-  font-family:'Orbitron',monospace; font-size:.52rem; font-weight:700;
-  letter-spacing:.5px; text-transform:uppercase; color:rgba(144,202,249,.5);
-  text-align:center; padding:8px; line-height:1.4;
+.header-stat {
+  text-align: right;
+  flex-shrink: 0;
 }
-.cover-ph .ph-ico { font-size:2rem; opacity:.65; }
-
-/* Owned tick */
-.tick {
-  position:absolute; top:5px; right:5px; width:22px; height:22px; border-radius:50%;
-  background:var(--gold); color:#000; font-size:12px; font-weight:900;
-  display:none; align-items:center; justify-content:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.4);
+.header-stat .big {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
 }
-.game-card.owned .tick { display:flex; }
+.header-stat .lbl {
+  font-size: .68rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 3px;
+}
+.progress-line {
+  width: 140px;
+  height: 2px;
+  background: var(--border2);
+  border-radius: 2px;
+  margin-top: 8px;
+  margin-left: auto;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width .6s ease;
+}
 
-/* Card info */
-.card-info { padding:7px 9px 9px; background:rgba(8,16,34,.85); flex:1; display:flex; flex-direction:column; gap:3px; }
-.card-name { font-size:.73rem; font-weight:700; line-height:1.25; color:var(--text); }
-.game-card.owned .card-name { color:var(--gold); }
-.card-foot { display:flex; align-items:center; justify-content:space-between; }
-.card-year { font-size:.65rem; color:var(--muted); }
-.card-plat { font-size:.57rem; color:var(--blue-light); background:rgba(21,101,192,.2); border-radius:3px; padding:1px 5px; }
+/* ── NAV ─────────────────────────────────── */
+.site-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-tab {
+  font-family: 'Syne', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 20px 12px 0;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.on { color: #fff; border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ──────────────────────────────── */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 40px 60px;
+}
+
+@media (max-width: 640px) {
+  .site-header { padding: 28px 20px 0; flex-direction: column; align-items: flex-start; }
+  .header-stat { text-align: left; }
+  .progress-line { margin-left: 0; }
+  .site-nav { padding: 20px 20px 0; }
+  .main { padding: 24px 20px 60px; }
+}
+
+.panel { display: none; }
+.panel.on { display: block; animation: appear .2s ease; }
+@keyframes appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ── SECTION HEADING ─────────────────────── */
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 36px 0 16px;
+}
+.sec-head:first-child { margin-top: 0; }
+.sec-name {
+  font-family: 'Syne', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.sec-line { flex: 1; height: 1px; background: var(--border); }
+.sec-count {
+  font-family: 'Syne', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--dim);
+  opacity: .6;
+}
+
+/* ── GAME GRID ───────────────────────────── */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.gcard {
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  position: relative;
+}
+.gcard:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+}
+.gcard.owned { border-color: rgba(91,141,239,.3); }
+.gcard.owned:hover { border-color: rgba(91,141,239,.6); }
+
+.gcover {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--panel);
+  position: relative;
+  flex-shrink: 0;
+}
+.gcover img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .35s ease;
+}
+.gcard:hover .gcover img { transform: scale(1.05); }
+
+.gph {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px;
+  background: var(--panel);
+}
+.gph-icon { font-size: 1.6rem; opacity: .3; }
+.gph-name {
+  font-family: 'Syne', sans-serif;
+  font-size: .48rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: center;
+  padding: 0 8px;
+  line-height: 1.5;
+  opacity: .7;
+}
+
+/* Owned marker */
+.owned-dot {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  display: none;
+}
+.gcard.owned .owned-dot { display: block; }
+
+/* Owned overlay on hover */
+.gcard.owned .gcover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(91,141,239,.06);
+  pointer-events: none;
+}
+
+.ginfo {
+  padding: 10px 10px 11px;
+  display: flex; flex-direction: column; gap: 4px;
+  border-top: 1px solid var(--border);
+}
+.gname {
+  font-family: 'Syne', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.gcard.owned .gname { color: #fff; }
+.gmeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+.gyear { font-size: .62rem; color: var(--dim); font-weight: 300; }
+.gplat {
+  font-size: .55rem;
+  color: var(--dim);
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+/* ── ADMIN ───────────────────────────────── */
+.adm-grid { display: flex; flex-direction: column; gap: 24px; }
+
+.adm-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+
+.adm-block-title {
+  font-family: 'Syne', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.adm-search {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: .88rem;
+  padding: 9px 14px;
+  outline: none;
+  margin-bottom: 14px;
+  transition: border-color .2s;
+}
+.adm-search:focus { border-color: var(--accent); }
+.adm-search::placeholder { color: var(--dim); opacity: .6; }
+
+.adm-list {
+  display: flex; flex-direction: column; gap: 6px;
+  max-height: 420px; overflow-y: auto; padding-right: 4px;
+}
+.adm-list::-webkit-scrollbar { width: 3px; }
+.adm-list::-webkit-scrollbar-track { background: transparent; }
+.adm-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.adm-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  transition: border-color .15s;
+}
+.adm-row:hover { border-color: var(--border2); }
+
+.adm-thumb {
+  width: 32px; height: 43px;
+  border-radius: 4px;
+  background: var(--bg);
+  flex-shrink: 0;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; color: var(--dim);
+}
+.adm-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.adm-hover {
+  position: absolute; inset: 0;
+  background: rgba(91,141,239,.7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; font-weight: 700; color: #fff;
+  font-family: 'Syne', sans-serif; letter-spacing: .05em;
+  opacity: 0; transition: opacity .15s;
+}
+.adm-thumb:hover .adm-hover { opacity: 1; }
+
+.adm-inf { flex: 1; min-width: 0; }
+.adm-name {
+  font-family: 'Syne', sans-serif;
+  font-size: .78rem; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text);
+}
+.adm-sub { font-size: .63rem; color: var(--dim); margin-top: 2px; font-weight: 300; }
+
+.adm-acts { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* Toggle */
+.tog { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+.tog input { display: none; }
+.tog-track {
+  width: 30px; height: 16px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  position: relative; flex-shrink: 0;
+  transition: background .2s, border-color .2s;
+}
+.tog-track::after {
+  content: ''; position: absolute;
+  top: 2px; left: 2px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--dim);
+  transition: all .2s;
+}
+.tog input:checked ~ .tog-track { background: rgba(91,141,239,.15); border-color: var(--accent); }
+.tog input:checked ~ .tog-track::after { transform: translateX(14px); background: var(--accent); }
+.tog-lbl { font-size: .65rem; color: var(--dim); font-weight: 500; font-family: 'Syne', sans-serif; letter-spacing: .05em; }
+
+.btn-del {
+  background: none;
+  border: 1px solid rgba(192,84,74,.25);
+  color: rgba(192,84,74,.7);
+  border-radius: 4px;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; cursor: pointer;
+  transition: all .15s;
+}
+.btn-del:hover { border-color: var(--danger); color: var(--danger); background: rgba(192,84,74,.08); }
+
+/* ADD FORM */
+.add-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 520px) { .add-grid { grid-template-columns: 1fr; } }
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-family: 'Syne', sans-serif;
+  font-size: .6rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--dim);
+}
+.field input, .field select {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: .88rem;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color .2s;
+}
+.field input:focus, .field select:focus { border-color: var(--accent); }
+.field input::placeholder { color: var(--dim); opacity: .5; }
+.field select option { background: #1a1a22; }
+
+.btn-add {
+  margin-top: 14px;
+  font-family: 'Syne', sans-serif;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 10px 22px;
+  background: var(--accent);
+  color: #fff;
+  border: none; border-radius: 6px;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s;
+}
+.btn-add:hover { opacity: .85; transform: translateY(-1px); }
+.btn-add:active { transform: none; }
+
+/* DANGER BUTTONS */
+.danger-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-dng {
+  font-family: 'Syne', sans-serif;
+  font-size: .63rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 8px 16px;
+  background: transparent;
+  color: rgba(192,84,74,.7);
+  border: 1px solid rgba(192,84,74,.25);
+  border-radius: 6px; cursor: pointer;
+  transition: all .2s;
+}
+.btn-dng:hover { color: var(--danger); border-color: var(--danger); background: rgba(192,84,74,.06); }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: var(--panel);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-size: .82rem; color: var(--text); font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  pointer-events: none;
+  opacity: 0; transform: translateY(6px); transition: all .25s;
+}
+.toast.show { opacity: 1; transform: none; }
+.toast.good { border-color: rgba(91,141,239,.4); }
+
+/* EMPTY STATE in admin */
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: var(--dim);
+  font-size: .82rem;
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-title">
-    <span class="hh">🦔</span>Ритин уголок<span class="hh">🦔</span>
+<header class="site-header">
+  <div>
+    <div class="site-title">Rita's <span>Collection</span></div>
+    <div class="site-sub">Sonic the Hedgehog Universe</div>
   </div>
-  <div class="header-sub">Gotta go fast · Sonic Universe</div>
-  <div class="rings-row">
-    <div class="ring" style="--i:0"></div>
-    <div class="ring" style="--i:1"></div>
-    <div class="ring" style="--i:2"></div>
-    <div class="ring" style="--i:3"></div>
-    <div class="ring" style="--i:4"></div>
+  <div class="header-stat">
+    <div class="big"><span id="h-owned">0</span> / <span id="h-total">0</span></div>
+    <div class="lbl">игр имеется</div>
+    <div class="progress-line"><div class="progress-fill" id="h-bar" style="width:0%"></div></div>
   </div>
 </header>
 
-<div class="tabs-wrapper">
-  <div class="tab-bar">
-    <button class="tab-btn active" data-tab="home">🏠 Главная</button>
-    <button class="tab-btn" data-tab="sonic">💿 Соник</button>
-  </div>
-  <div class="tab-content">
+<nav class="site-nav">
+  <button class="nav-tab on" data-t="col">Коллекция</button>
+  <button class="nav-tab" data-t="adm">Управление</button>
+</nav>
 
-    <div class="tab-panel active" id="tab-home">
-      <div class="home-inner">
-        <div class="avatar">🌀</div>
-        <div class="welcome">Привет, Рита! 💙</div>
-        <div class="home-desc">Это твой личный уголок в честь самого быстрого ежа во вселенной. Отмечай игры из коллекции!</div>
-        <div class="badges">
-          <span class="badge b-gold">🦔 Sonic Fan</span>
-          <span class="badge b-blue">💿 Collector</span>
-          <span class="badge b-red">🔴 Chaos Emerald</span>
+<main class="main">
+
+  <div class="panel on" id="p-col">
+    <div id="groot"></div>
+  </div>
+
+  <div class="panel" id="p-adm">
+    <div class="adm-grid">
+
+      <div class="adm-block">
+        <div class="adm-block-title">Список игр</div>
+        <input class="adm-search" id="asearch" type="text" placeholder="Поиск...">
+        <div class="adm-list" id="alist"></div>
+      </div>
+
+      <div class="adm-block">
+        <div class="adm-block-title">Добавить игру</div>
+        <div class="add-grid">
+          <div class="field"><label>Название</label><input id="fn" type="text" placeholder="Sonic the Hedgehog"></div>
+          <div class="field"><label>Год</label><input id="fy" type="text" placeholder="1991"></div>
+          <div class="field"><label>Платформа</label><input id="fp" type="text" placeholder="Genesis, PS4..."></div>
+          <div class="field">
+            <label>Раздел</label>
+            <select id="fs">
+              <option value="genesis">Genesis</option>
+              <option value="dreamcast">Dreamcast</option>
+              <option value="7thgen">7-е поколение</option>
+              <option value="modern">Современные</option>
+              <option value="remaster">Ремастеры</option>
+              <option value="gamegear">Game Gear</option>
+              <option value="gba">GBA</option>
+              <option value="ds">DS / 3DS</option>
+              <option value="wii">Wii</option>
+              <option value="racing">Гонки</option>
+              <option value="mania">Mania</option>
+              <option value="mobile">Мобильные</option>
+              <option value="other">Другое</option>
+            </select>
+          </div>
         </div>
-        <div class="fact-box">💡 <strong>Интересный факт:</strong> Первый Sonic the Hedgehog вышел 23 июня 1991 года — этот день отмечается как <em>Sonic the Hedgehog Day</em>! 🎉</div>
-        <div class="ring-score">💍 <span id="ring-count">0</span> колец собрано</div>
+        <button class="btn-add" id="badd">Добавить</button>
       </div>
-    </div>
 
-    <div class="tab-panel" id="tab-sonic">
-      <div class="stats-bar">
-        <div class="st"><div class="st-n" id="owned-n">0</div><div class="st-l">Имеется</div></div>
-        <div class="bar-wrap"><div class="bar-fill" id="bar" style="width:0%"></div></div>
-        <div class="st"><div class="st-n" id="total-n">0</div><div class="st-l">Всего</div></div>
+      <div class="adm-block">
+        <div class="adm-block-title">Сброс данных</div>
+        <div class="danger-row">
+          <button class="btn-dng" id="bro">Сбросить галочки</button>
+          <button class="btn-dng" id="brc">Удалить обложки</button>
+          <button class="btn-dng" id="bra">Сбросить всё</button>
+        </div>
       </div>
-      <div id="games-root"></div>
-    </div>
 
+    </div>
   </div>
-</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+<input type="file" id="fup" accept="image/*" style="display:none">
 
 <script>
-// Steam CDN: library_600x900.jpg (portrait, perfect for cards)
-// Fallback chain: library_600x900 → header.jpg → placeholder
-var S = 'https://cdn.akamai.steamstatic.com/steam/apps/';
-function steamCover(id) { return S + id + '/library_600x900.jpg'; }
-function steamHeader(id) { return S + id + '/header.jpg'; }
+// ── DATA ──────────────────────────────────────────────────────────────────
+var DEFAULTS = [
+  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',   sec:'genesis'},
+  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',   sec:'genesis'},
+  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',   sec:'genesis'},
+  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',   sec:'genesis'},
+  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',   sec:'genesis'},
+  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',   sec:'genesis'},
+  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', sec:'dreamcast'},
+  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', sec:'dreamcast'},
+  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',   sec:'dreamcast'},
+  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',   sec:'dreamcast'},
+  {id:'c71',  name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',   sec:'7thgen'},
+  {id:'c72',  name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',   sec:'7thgen'},
+  {id:'c73',  name:'Sonic Colors',                  year:'2010', plat:'Wii',       sec:'7thgen'},
+  {id:'c74',  name:'Sonic Generations',             year:'2011', plat:'PS3/360',   sec:'7thgen'},
+  {id:'c75',  name:'Sonic Lost World',              year:'2013', plat:'Wii U',     sec:'7thgen'},
+  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     sec:'modern'},
+  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     sec:'modern'},
+  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     sec:'modern'},
+  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     sec:'remaster'},
+  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     sec:'remaster'},
+  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     sec:'remaster'},
+  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear', sec:'gamegear'},
+  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear', sec:'gamegear'},
+  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear', sec:'gamegear'},
+  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear', sec:'gamegear'},
+  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',       sec:'gba'},
+  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',       sec:'gba'},
+  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',       sec:'gba'},
+  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',       sec:'gba'},
+  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',        sec:'ds'},
+  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',        sec:'ds'},
+  {id:'ds3',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',       sec:'ds'},
+  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',       sec:'wii'},
+  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',       sec:'wii'},
+  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',     sec:'racing'},
+  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',     sec:'racing'},
+  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',  sec:'racing'},
+  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     sec:'racing'},
+  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     sec:'racing'},
+  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     sec:'racing'},
+  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     sec:'mania'},
+  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     sec:'mania'},
+  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',    sec:'mobile'},
+  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',    sec:'mobile'},
+  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',    sec:'mobile'}
+];
 
-// ph = placeholder color gradient (css string)
-var PH = {
-  genesis:  'linear-gradient(160deg,#0d1f44,#1a3a6e)',
-  dreamcast:'linear-gradient(160deg,#1a0d44,#3a1a6e)',
-  modern:   'linear-gradient(160deg,#0d2a1a,#1a5e36)',
-  remaster: 'linear-gradient(160deg,#221a0d,#6e4e1a)',
-  handheld: 'linear-gradient(160deg,#1a1a0d,#4e4e1a)',
-  racing:   'linear-gradient(160deg,#2a0d0d,#6e1a1a)',
-  mobile:   'linear-gradient(160deg,#0d2a2a,#1a5e5e)',
+var SEC_LABEL = {
+  genesis:'Sega Genesis', dreamcast:'Dreamcast / GameCube', '7thgen':'7th Gen Consoles',
+  modern:'Modern', remaster:'Remasters', gamegear:'Game Gear', gba:'Game Boy Advance',
+  ds:'DS / 3DS', wii:'Wii', racing:'Racing & Spin-offs', mania:'Sonic Mania', mobile:'Mobile', other:'Other'
 };
+var SEC_ORDER = ['genesis','dreamcast','7thgen','modern','remaster','gamegear','gba','ds','wii','racing','mania','mobile','other'];
 
-// Game list
-// steam: app id (if on Steam) — images load directly, no API needed
-// cover: direct URL override (for non-Steam games we hardcode Wikimedia)
-// ph: placeholder colour key
-var GAMES = [
-  // ── Genesis ───────────────────────────────────────────────────────────
-  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',
-    cover:'https://upload.wikimedia.org/wikipedia/en/c/cb/Sonic_the_Hedgehog_1_Genesis_box_art.jpg', ph:'genesis'},
-  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',
-    cover:'https://upload.wikimedia.org/wikipedia/en/a/a3/Sonic_the_Hedgehog_2.jpg', ph:'genesis'},
-  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',
-    cover:'https://upload.wikimedia.org/wikipedia/en/b/bd/Sonic_CD_NA.jpg', ph:'genesis'},
-  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',
-    cover:'https://upload.wikimedia.org/wikipedia/en/4/4a/Sonic_the_Hedgehog_3_box_art.jpg', ph:'genesis'},
-  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',
-    cover:'https://upload.wikimedia.org/wikipedia/en/9/9b/Sonic_%26_Knuckles.jpg', ph:'genesis'},
-  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',
-    cover:'https://upload.wikimedia.org/wikipedia/en/9/94/Sonic3DBlastSaturnCover.jpg', ph:'genesis'},
+// ── STATE ─────────────────────────────────────────────────────────────────
+function lsGet(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e) { return d; } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { showToast('Ошибка сохранения'); } }
 
-  // ── Dreamcast / GCN ───────────────────────────────────────────────────
-  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', steam:71250,   ph:'dreamcast'},
-  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', steam:213610,  ph:'dreamcast'},
-  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',
-    cover:'https://upload.wikimedia.org/wikipedia/en/6/60/Sonic_Heroes_game_cover.jpg', ph:'dreamcast'},
-  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',
-    cover:'https://upload.wikimedia.org/wikipedia/en/3/30/Shadowthehedgehog.jpg', ph:'dreamcast'},
+var games = lsGet('rcol_g', null);
+if (!games) { games = JSON.parse(JSON.stringify(DEFAULTS)); lsSet('rcol_g', games); }
+var owned = lsGet('rcol_o', []);
 
-  // ── 7th gen ───────────────────────────────────────────────────────────
-  {id:'c7_1', name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',
-    cover:'https://upload.wikimedia.org/wikipedia/en/0/06/Sonic-The-Hedgehog-360.jpg', ph:'modern'},
-  {id:'c7_2', name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',
-    cover:'https://upload.wikimedia.org/wikipedia/en/7/71/Sonic_Unleashed.jpg', ph:'modern'},
-  {id:'c7_3', name:'Sonic Colors',                  year:'2010', plat:'Wii',       steam:1462020, ph:'modern'},
-  {id:'c7_4', name:'Sonic Generations',             year:'2011', plat:'PS3/360',   steam:71340,   ph:'modern'},
-  {id:'c7_5', name:'Sonic Lost World',              year:'2013', plat:'Wii U',     steam:329440,  ph:'modern'},
+// ── INDEXEDDB ─────────────────────────────────────────────────────────────
+var db = null;
+var coverURLs = {};
 
-  // ── Modern ────────────────────────────────────────────────────────────
-  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     steam:637100,  ph:'modern'},
-  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     steam:1237320, ph:'modern'},
-  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     steam:2261570, ph:'modern'},
+function openDB(cb) {
+  var req = indexedDB.open('RitaCol2', 1);
+  req.onupgradeneeded = function(e) { e.target.result.createObjectStore('covers'); };
+  req.onsuccess = function(e) { db = e.target.result; cb(); };
+  req.onerror = function() { cb(); };
+}
+function dbSave(id, blob, cb) {
+  if (!db) { cb && cb(); return; }
+  var tx = db.transaction('covers', 'readwrite');
+  tx.objectStore('covers').put(blob, id);
+  tx.oncomplete = function() { cb && cb(); };
+  tx.onerror = function() { cb && cb(); };
+}
+function dbLoad(id, cb) {
+  if (!db) { cb(null); return; }
+  var tx = db.transaction('covers', 'readonly');
+  var r = tx.objectStore('covers').get(id);
+  r.onsuccess = function(e) { cb(e.target.result || null); };
+  r.onerror = function() { cb(null); };
+}
+function dbDel(id, cb) {
+  if (!db) { cb && cb(); return; }
+  var tx = db.transaction('covers', 'readwrite');
+  tx.objectStore('covers').delete(id);
+  tx.oncomplete = function() { cb && cb(); };
+}
+function dbClear(cb) {
+  if (!db) { cb && cb(); return; }
+  var tx = db.transaction('covers', 'readwrite');
+  tx.objectStore('covers').clear();
+  tx.oncomplete = function() { cb && cb(); };
+}
+function dbKeys(cb) {
+  if (!db) { cb([]); return; }
+  var tx = db.transaction('covers', 'readonly');
+  var r = tx.objectStore('covers').getAllKeys();
+  r.onsuccess = function(e) { cb(e.target.result || []); };
+  r.onerror = function() { cb([]); };
+}
+function preloadAll(ids, cb) {
+  var left = ids.length;
+  if (!left) { cb(); return; }
+  ids.forEach(function(id) {
+    dbLoad(id, function(blob) {
+      if (blob) { if (coverURLs[id]) URL.revokeObjectURL(coverURLs[id]); coverURLs[id] = URL.createObjectURL(blob); }
+      if (--left === 0) cb();
+    });
+  });
+}
 
-  // ── Remasters ─────────────────────────────────────────────────────────
-  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     steam:1462020, ph:'remaster'},
-  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     steam:1794960, ph:'remaster'},
-  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     steam:1794960, ph:'remaster'},
+// ── TOAST ─────────────────────────────────────────────────────────────────
+var _tt = null;
+function showToast(msg, good) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (good ? ' good' : '');
+  clearTimeout(_tt);
+  _tt = setTimeout(function() { el.classList.remove('show'); }, 2200);
+}
 
-  // ── Game Gear ─────────────────────────────────────────────────────────
-  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear',
-    cover:'https://upload.wikimedia.org/wikipedia/en/3/35/Sonic_Chaos_cover.jpg', ph:'handheld'},
-  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear',
-    cover:'https://upload.wikimedia.org/wikipedia/en/4/41/Sonic_Triple_Trouble_cover.jpg', ph:'handheld'},
-  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear',
-    cover:'https://upload.wikimedia.org/wikipedia/en/1/1b/Sonic_Labyrinth_cover.jpg', ph:'handheld'},
-  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear',                ph:'handheld'},
-
-  // ── GBA ───────────────────────────────────────────────────────────────
-  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',
-    cover:'https://upload.wikimedia.org/wikipedia/en/1/13/Sonic_Advance_GBA_box_art.jpg', ph:'handheld'},
-  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',
-    cover:'https://upload.wikimedia.org/wikipedia/en/a/a2/Sonic_Advance_2.jpg', ph:'handheld'},
-  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',
-    cover:'https://upload.wikimedia.org/wikipedia/en/9/9b/Sonic_Advance_3.jpg', ph:'handheld'},
-  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',
-    cover:'https://upload.wikimedia.org/wikipedia/en/f/f1/Sonic_Battle_Coverart.jpg', ph:'handheld'},
-
-  // ── DS / 3DS ──────────────────────────────────────────────────────────
-  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',
-    cover:'https://upload.wikimedia.org/wikipedia/en/4/4c/Sonic_Rush_DS_NA.jpg', ph:'handheld'},
-  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',
-    cover:'https://upload.wikimedia.org/wikipedia/en/2/24/Sonic_Rush_Adventure.jpg', ph:'handheld'},
-  {id:'ds5',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',                       ph:'handheld'},
-
-  // ── Wii ───────────────────────────────────────────────────────────────
-  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',
-    cover:'https://upload.wikimedia.org/wikipedia/en/c/c3/Sonic_and_the_Secret_Rings.jpg', ph:'modern'},
-  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',
-    cover:'https://upload.wikimedia.org/wikipedia/en/c/c8/Sonic_and_the_Black_Knight.jpg', ph:'modern'},
-
-  // ── Racing ────────────────────────────────────────────────────────────
-  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',
-    cover:'https://upload.wikimedia.org/wikipedia/en/1/14/Sonic_Riders.jpg', ph:'racing'},
-  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',
-    cover:'https://upload.wikimedia.org/wikipedia/en/5/53/Sonic_Riders_Zero_Gravity.jpg', ph:'racing'},
-  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',
-    cover:'https://upload.wikimedia.org/wikipedia/en/7/79/Sonic_Free_Riders_cover.jpg', ph:'racing'},
-  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     steam:34270,   ph:'racing'},
-  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     steam:212480,  ph:'racing'},
-  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     steam:1026600, ph:'racing'},
-
-  // ── Mania ─────────────────────────────────────────────────────────────
-  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     steam:584400,  ph:'modern'},
-  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     steam:584400,  ph:'modern'},
-
-  // ── Mobile ────────────────────────────────────────────────────────────
-  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',
-    cover:'https://upload.wikimedia.org/wikipedia/en/1/16/Sonic_Dash_cover_art.jpg', ph:'mobile'},
-  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',                   ph:'mobile'},
-  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',                   ph:'mobile'},
-];
-
-var SECTIONS = [
-  {label:'🎮 Основная серия — Sega Genesis',   ids:['sg1','sg2','sg3','sg4','sg5','sg6']},
-  {label:'🖥️ Dreamcast / GameCube эпоха',     ids:['dc1','dc2','dc3','dc4']},
-  {label:'📺 Консоли 7-го поколения',         ids:['c7_1','c7_2','c7_3','c7_4','c7_5']},
-  {label:'⚡ Современные игры',               ids:['mod1','mod2','mod3']},
-  {label:'📦 Ремастеры и сборники',           ids:['rem1','rem2','rem3']},
-  {label:'🎴 Game Gear',                      ids:['hh1','hh2','hh3','hh4']},
-  {label:'🔷 Game Boy Advance',               ids:['gba1','gba2','gba3','gba4']},
-  {label:'🔵 DS / 3DS',                      ids:['ds1','ds2','ds5']},
-  {label:'🌀 Wii',                            ids:['wii1','wii2']},
-  {label:'🏎️ Гонки и спин-оффы',             ids:['sp1','sp2','sp3','sp4','sp5','sp6']},
-  {label:'✨ Sonic Mania',                    ids:['ind1','ind2']},
-  {label:'📱 Мобильные',                     ids:['mob1','mob2','mob3']},
-];
-
-// State
-var owned = [];
-try { owned = JSON.parse(localStorage.getItem('rita_owned') || '[]'); } catch(e) {}
-function saveOwned() { try { localStorage.setItem('rita_owned', JSON.stringify(owned)); } catch(e) {} }
-
-// Tabs
-document.querySelectorAll('.tab-btn').forEach(function(btn) {
+// ── TABS ──────────────────────────────────────────────────────────────────
+document.querySelectorAll('.nav-tab').forEach(function(btn) {
   btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('on'); });
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('on'); });
+    btn.classList.add('on');
+    document.getElementById('p-' + btn.dataset.t).classList.add('on');
+    if (btn.dataset.t === 'adm') renderAdmin('');
   });
 });
 
-// Build placeholder div
-function makePlaceholder(game) {
-  var div = document.createElement('div');
-  div.className = 'cover-ph';
-  div.style.background = PH[game.ph] || PH.genesis;
-  var ico = document.createElement('div');
-  ico.className = 'ph-ico';
-  ico.textContent = '🦔';
-  var nm = document.createElement('div');
-  nm.textContent = game.name;
-  div.appendChild(ico);
-  div.appendChild(nm);
-  return div;
+// ── PLACEHOLDER ───────────────────────────────────────────────────────────
+function makePh(game) {
+  var d = document.createElement('div'); d.className = 'gph';
+  var ico = document.createElement('div'); ico.className = 'gph-icon'; ico.textContent = '◈';
+  var nm = document.createElement('div'); nm.className = 'gph-name'; nm.textContent = game.name;
+  d.appendChild(ico); d.appendChild(nm);
+  return d;
 }
 
-// Build img with fallback chain: steam 600x900 → steam header → placeholder
-function makeImg(game, wrap) {
-  var img = document.createElement('img');
-  img.className = 'cover-img';
-  img.alt = game.name;
-
-  // Determine primary URL
-  var primaryUrl = null;
-  var fallbackUrl = null;
-
-  if (game.cover) {
-    primaryUrl = game.cover;
-  } else if (game.steam) {
-    primaryUrl = steamCover(game.steam);
-    fallbackUrl = steamHeader(game.steam);
+// ── COVER IN WRAP ─────────────────────────────────────────────────────────
+function fillCover(wrap, game) {
+  var dot = wrap.querySelector('.owned-dot');
+  Array.from(wrap.childNodes).forEach(function(n) { if (n !== dot) wrap.removeChild(n); });
+  var url = coverURLs[game.id];
+  if (url) {
+    var img = document.createElement('img');
+    img.src = url; img.alt = game.name;
+    img.onerror = function() { if (img.parentNode === wrap) { wrap.removeChild(img); wrap.insertBefore(makePh(game), dot); } };
+    wrap.insertBefore(img, dot);
+  } else {
+    wrap.insertBefore(makePh(game), dot);
   }
-
-  if (!primaryUrl) {
-    wrap.appendChild(makePlaceholder(game));
-    return;
-  }
-
-  img.src = primaryUrl;
-
-  img.addEventListener('error', function() {
-    if (fallbackUrl && img.src !== fallbackUrl) {
-      img.src = fallbackUrl;
-    } else {
-      // Replace with placeholder
-      if (img.parentNode) {
-        img.parentNode.replaceChild(makePlaceholder(game), img);
-      }
-    }
-  });
-
-  wrap.appendChild(img);
 }
 
+// ── GAME CARD ─────────────────────────────────────────────────────────────
 function makeCard(game) {
   var isOwned = owned.indexOf(game.id) !== -1;
-
   var card = document.createElement('div');
-  card.className = 'game-card' + (isOwned ? ' owned' : '');
+  card.className = 'gcard' + (isOwned ? ' owned' : '');
   card.id = 'gc-' + game.id;
 
-  // Cover
-  var wrap = document.createElement('div');
-  wrap.className = 'cover-wrap';
-  makeImg(game, wrap);
+  var cov = document.createElement('div'); cov.className = 'gcover';
+  var dot = document.createElement('div'); dot.className = 'owned-dot';
+  cov.appendChild(dot);
+  fillCover(cov, game);
 
-  var tick = document.createElement('div');
-  tick.className = 'tick';
-  tick.textContent = '✓';
-  wrap.appendChild(tick);
+  var inf = document.createElement('div'); inf.className = 'ginfo';
+  var nm = document.createElement('div'); nm.className = 'gname'; nm.textContent = game.name;
+  var meta = document.createElement('div'); meta.className = 'gmeta';
+  var yr = document.createElement('span'); yr.className = 'gyear'; yr.textContent = game.year;
+  var pl = document.createElement('span'); pl.className = 'gplat'; pl.textContent = game.plat;
+  meta.appendChild(yr); meta.appendChild(pl);
+  inf.appendChild(nm); inf.appendChild(meta);
 
-  // Info
-  var info = document.createElement('div');
-  info.className = 'card-info';
-
-  var nm = document.createElement('div');
-  nm.className = 'card-name';
-  nm.textContent = game.name;
-
-  var foot = document.createElement('div');
-  foot.className = 'card-foot';
-
-  var yr = document.createElement('span');
-  yr.className = 'card-year';
-  yr.textContent = game.year;
-
-  var pl = document.createElement('span');
-  pl.className = 'card-plat';
-  pl.textContent = game.plat;
-
-  foot.appendChild(yr);
-  foot.appendChild(pl);
-  info.appendChild(nm);
-  info.appendChild(foot);
-
-  card.appendChild(wrap);
-  card.appendChild(info);
-
-  card.addEventListener('click', function() { toggle(game.id); });
+  card.appendChild(cov); card.appendChild(inf);
+  card.addEventListener('click', function() { toggleOwned(game.id); });
   return card;
 }
 
-function renderAll() {
-  var root = document.getElementById('games-root');
+// ── RENDER COLLECTION ─────────────────────────────────────────────────────
+function renderCol() {
+  var root = document.getElementById('groot');
   root.innerHTML = '';
-  var gMap = {};
-  GAMES.forEach(function(g) { gMap[g.id] = g; });
-
-  SECTIONS.forEach(function(sec) {
-    var h = document.createElement('div');
-    h.className = 'sec-title';
-    h.textContent = sec.label;
+  var grouped = {};
+  games.forEach(function(g) {
+    var s = g.sec || 'other';
+    if (!grouped[s]) grouped[s] = [];
+    grouped[s].push(g);
+  });
+  var first = true;
+  SEC_ORDER.forEach(function(sec) {
+    if (!grouped[sec] || !grouped[sec].length) return;
+    var h = document.createElement('div'); h.className = 'sec-head';
+    if (!first) h.style.marginTop = '36px';
+    first = false;
+    var nm = document.createElement('div'); nm.className = 'sec-name'; nm.textContent = SEC_LABEL[sec] || sec;
+    var line = document.createElement('div'); line.className = 'sec-line';
+    var cnt = document.createElement('div'); cnt.className = 'sec-count';
+    var secOwned = grouped[sec].filter(function(g) { return owned.indexOf(g.id) !== -1; }).length;
+    cnt.textContent = secOwned + ' / ' + grouped[sec].length;
+    h.appendChild(nm); h.appendChild(line); h.appendChild(cnt);
     root.appendChild(h);
-
-    var grid = document.createElement('div');
-    grid.className = 'games-grid';
-    sec.ids.forEach(function(id) {
-      if (gMap[id]) grid.appendChild(makeCard(gMap[id]));
-    });
+    var grid = document.createElement('div'); grid.className = 'game-grid';
+    grouped[sec].forEach(function(g) { grid.appendChild(makeCard(g)); });
     root.appendChild(grid);
   });
-
   updateStats();
 }
 
-function toggle(id) {
+// ── TOGGLE ────────────────────────────────────────────────────────────────
+function toggleOwned(id) {
   var idx = owned.indexOf(id);
   if (idx === -1) owned.push(id); else owned.splice(idx, 1);
-  saveOwned();
-  var on = owned.indexOf(id) !== -1;
+  lsSet('rcol_o', owned);
+  var isOn = owned.indexOf(id) !== -1;
   var card = document.getElementById('gc-' + id);
-  if (card) card.classList.toggle('owned', on);
+  if (card) card.classList.toggle('owned', isOn);
+  var tog = document.getElementById('at-' + id);
+  if (tog) tog.checked = isOn;
   updateStats();
+  // Re-render section counts
+  renderSecCounts();
+}
+
+function renderSecCounts() {
+  // Update count labels in section headers
+  var grouped = {};
+  games.forEach(function(g) { var s = g.sec||'other'; if(!grouped[s]) grouped[s]=[]; grouped[s].push(g); });
+  document.querySelectorAll('.sec-count').forEach(function(el, i) {
+    var sec = SEC_ORDER.filter(function(s) { return grouped[s] && grouped[s].length; })[i];
+    if (!sec) return;
+    var secOwned = grouped[sec].filter(function(g) { return owned.indexOf(g.id) !== -1; }).length;
+    el.textContent = secOwned + ' / ' + grouped[sec].length;
+  });
 }
 
 function updateStats() {
-  var total = GAMES.length;
-  var count = owned.length;
-  document.getElementById('owned-n').textContent = count;
-  document.getElementById('total-n').textContent = total;
-  document.getElementById('bar').style.width = (count / total * 100).toFixed(1) + '%';
-  document.getElementById('ring-count').textContent = count * 10;
+  var total = games.length, count = owned.length;
+  document.getElementById('h-owned').textContent = count;
+  document.getElementById('h-total').textContent = total;
+  document.getElementById('h-bar').style.width = (total ? (count/total*100).toFixed(1) : 0) + '%';
 }
 
-renderAll();
+// ── ADMIN ─────────────────────────────────────────────────────────────────
+var uploadId = null;
+
+function renderAdmin(filter) {
+  var list = document.getElementById('alist');
+  list.innerHTML = '';
+  var q = filter.toLowerCase();
+  var shown = games.filter(function(g) { return !q || g.name.toLowerCase().indexOf(q) !== -1; });
+  if (!shown.length) {
+    var e = document.createElement('div'); e.className = 'empty-state'; e.textContent = 'Ничего не найдено';
+    list.appendChild(e); return;
+  }
+  shown.forEach(function(game) {
+    var row = document.createElement('div'); row.className = 'adm-row';
+
+    var thumb = document.createElement('div'); thumb.className = 'adm-thumb';
+    var url = coverURLs[game.id];
+    if (url) { var ti = document.createElement('img'); ti.src = url; thumb.appendChild(ti); }
+    else { thumb.textContent = '◈'; }
+    var hov = document.createElement('div'); hov.className = 'adm-hover'; hov.textContent = 'ЗАГРУЗИТЬ';
+    thumb.appendChild(hov);
+    thumb.addEventListener('click', function() { uploadId = game.id; document.getElementById('fup').click(); });
+
+    var inf = document.createElement('div'); inf.className = 'adm-inf';
+    var anm = document.createElement('div'); anm.className = 'adm-name'; anm.textContent = game.name;
+    var sub = document.createElement('div'); sub.className = 'adm-sub'; sub.textContent = game.year + ' · ' + game.plat;
+    inf.appendChild(anm); inf.appendChild(sub);
+
+    var acts = document.createElement('div'); acts.className = 'adm-acts';
+
+    var tl = document.createElement('label'); tl.className = 'tog';
+    var ti2 = document.createElement('input'); ti2.type = 'checkbox'; ti2.id = 'at-' + game.id;
+    ti2.checked = owned.indexOf(game.id) !== -1;
+    ti2.addEventListener('change', function() { toggleOwned(game.id); });
+    var tb = document.createElement('div'); tb.className = 'tog-track';
+    var tlb = document.createElement('span'); tlb.className = 'tog-lbl'; tlb.textContent = 'есть';
+    tl.appendChild(ti2); tl.appendChild(tb); tl.appendChild(tlb);
+
+    var del = document.createElement('button'); del.className = 'btn-del'; del.textContent = '✕';
+    del.addEventListener('click', function() {
+      if (!confirm('Удалить «' + game.name + '»?')) return;
+      games = games.filter(function(g) { return g.id !== game.id; });
+      owned = owned.filter(function(i) { return i !== game.id; });
+      lsSet('rcol_g', games); lsSet('rcol_o', owned);
+      dbDel(game.id, function() {
+        if (coverURLs[game.id]) { URL.revokeObjectURL(coverURLs[game.id]); delete coverURLs[game.id]; }
+        renderCol(); renderAdmin(document.getElementById('asearch').value);
+        showToast('Удалено: ' + game.name);
+      });
+    });
+
+    acts.appendChild(tl); acts.appendChild(del);
+    row.appendChild(thumb); row.appendChild(inf); row.appendChild(acts);
+    list.appendChild(row);
+  });
+}
+
+document.getElementById('asearch').addEventListener('input', function() { renderAdmin(this.value); });
+
+// ── FILE UPLOAD ───────────────────────────────────────────────────────────
+document.getElementById('fup').addEventListener('change', function() {
+  var file = this.files[0]; this.value = '';
+  if (!file || !uploadId) return;
+  var id = uploadId; uploadId = null;
+  dbSave(id, file, function() {
+    if (coverURLs[id]) URL.revokeObjectURL(coverURLs[id]);
+    coverURLs[id] = URL.createObjectURL(file);
+    var card = document.getElementById('gc-' + id);
+    if (card) { var g = games.find(function(x){return x.id===id;}); if(g) fillCover(card.querySelector('.gcover'),g); }
+    renderAdmin(document.getElementById('asearch').value);
+    showToast('Обложка сохранена', true);
+  });
+});
+
+// ── ADD ───────────────────────────────────────────────────────────────────
+document.getElementById('badd').addEventListener('click', function() {
+  var name = document.getElementById('fn').value.trim();
+  if (!name) { showToast('Введи название игры'); return; }
+  var g = { id:'u'+Date.now(), name:name, year:document.getElementById('fy').value.trim()||'—', plat:document.getElementById('fp').value.trim()||'—', sec:document.getElementById('fs').value };
+  games.push(g); lsSet('rcol_g', games);
+  document.getElementById('fn').value = ''; document.getElementById('fy').value = ''; document.getElementById('fp').value = '';
+  renderCol(); renderAdmin(document.getElementById('asearch').value);
+  showToast('Добавлено: ' + g.name, true);
+});
+
+// ── RESETS ────────────────────────────────────────────────────────────────
+document.getElementById('bro').addEventListener('click', function() {
+  if (!confirm('Сбросить все галочки?')) return;
+  owned = []; lsSet('rcol_o', owned);
+  renderCol(); renderAdmin(document.getElementById('asearch').value);
+  showToast('Галочки сброшены');
+});
+document.getElementById('brc').addEventListener('click', function() {
+  if (!confirm('Удалить все обложки?')) return;
+  dbClear(function() {
+    Object.keys(coverURLs).forEach(function(k) { URL.revokeObjectURL(coverURLs[k]); }); coverURLs = {};
+    renderCol(); renderAdmin(document.getElementById('asearch').value);
+    showToast('Обложки удалены');
+  });
+});
+document.getElementById('bra').addEventListener('click', function() {
+  if (!confirm('Сбросить всё? Игры вернутся к стандартным.')) return;
+  dbClear(function() {
+    Object.keys(coverURLs).forEach(function(k) { URL.revokeObjectURL(coverURLs[k]); }); coverURLs = {};
+    games = JSON.parse(JSON.stringify(DEFAULTS)); owned = [];
+    lsSet('rcol_g', games); lsSet('rcol_o', owned);
+    renderCol(); renderAdmin('');
+    showToast('Сброшено');
+  });
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+openDB(function() {
+  dbKeys(function(ids) {
+    preloadAll(ids, function() { renderCol(); });
+  });
+});
 </script>
 </body>
 </html>
