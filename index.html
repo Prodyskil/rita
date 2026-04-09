@@ -30,7 +30,6 @@ body {
   font-size: 14px;
 }
 
-/* ── HEADER ─────────────────────────────── */
 .site-header {
   padding: 40px 40px 0;
   max-width: 1200px;
@@ -50,9 +49,7 @@ body {
   line-height: 1;
 }
 
-.site-title span {
-  color: var(--accent);
-}
+.site-title span { color: var(--accent); }
 
 .site-sub {
   font-family: 'Syne', sans-serif;
@@ -64,10 +61,7 @@ body {
   margin-top: 6px;
 }
 
-.header-stat {
-  text-align: right;
-  flex-shrink: 0;
-}
+.header-stat { text-align: right; flex-shrink: 0; }
 .header-stat .big {
   font-family: 'Syne', sans-serif;
   font-size: 2rem;
@@ -98,7 +92,6 @@ body {
   transition: width .6s ease;
 }
 
-/* ── NAV ─────────────────────────────────── */
 .site-nav {
   max-width: 1200px;
   margin: 0 auto;
@@ -127,7 +120,6 @@ body {
 .nav-tab:hover { color: var(--text); }
 .nav-tab.on { color: #fff; border-bottom-color: var(--accent); }
 
-/* ── LAYOUT ──────────────────────────────── */
 .main {
   max-width: 1200px;
   margin: 0 auto;
@@ -146,7 +138,6 @@ body {
 .panel.on { display: block; animation: appear .2s ease; }
 @keyframes appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
-/* ── SECTION HEADING ─────────────────────── */
 .sec-head {
   display: flex;
   align-items: baseline;
@@ -172,7 +163,6 @@ body {
   opacity: .6;
 }
 
-/* ── GAME GRID ───────────────────────────── */
 .game-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -234,7 +224,6 @@ body {
   opacity: .7;
 }
 
-/* Owned marker */
 .owned-dot {
   position: absolute;
   top: 8px; right: 8px;
@@ -246,7 +235,6 @@ body {
 }
 .gcard.owned .owned-dot { display: block; }
 
-/* Owned overlay on hover */
 .gcard.owned .gcover::after {
   content: '';
   position: absolute;
@@ -287,7 +275,6 @@ body {
   letter-spacing: .04em;
 }
 
-/* ── ADMIN ───────────────────────────────── */
 .adm-grid { display: flex; flex-direction: column; gap: 24px; }
 
 .adm-block {
@@ -348,7 +335,6 @@ body {
   border-radius: 4px;
   background: var(--bg);
   flex-shrink: 0;
-  cursor: pointer;
   overflow: hidden;
   border: 1px solid var(--border2);
   position: relative;
@@ -356,15 +342,6 @@ body {
   font-size: .9rem; color: var(--dim);
 }
 .adm-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.adm-hover {
-  position: absolute; inset: 0;
-  background: rgba(91,141,239,.7);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .6rem; font-weight: 700; color: #fff;
-  font-family: 'Syne', sans-serif; letter-spacing: .05em;
-  opacity: 0; transition: opacity .15s;
-}
-.adm-thumb:hover .adm-hover { opacity: 1; }
 
 .adm-inf { flex: 1; min-width: 0; }
 .adm-name {
@@ -377,7 +354,6 @@ body {
 
 .adm-acts { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-/* Toggle */
 .tog { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
 .tog input { display: none; }
 .tog-track {
@@ -412,7 +388,6 @@ body {
 }
 .btn-del:hover { border-color: var(--danger); color: var(--danger); background: rgba(192,84,74,.08); }
 
-/* ADD FORM */
 .add-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -456,7 +431,6 @@ body {
 .btn-add:hover { opacity: .85; transform: translateY(-1px); }
 .btn-add:active { transform: none; }
 
-/* DANGER BUTTONS */
 .danger-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .btn-dng {
   font-family: 'Syne', sans-serif;
@@ -471,7 +445,6 @@ body {
 }
 .btn-dng:hover { color: var(--danger); border-color: var(--danger); background: rgba(192,84,74,.06); }
 
-/* TOAST */
 .toast {
   position: fixed; bottom: 24px; right: 24px; z-index: 999;
   background: var(--panel);
@@ -486,7 +459,6 @@ body {
 .toast.show { opacity: 1; transform: none; }
 .toast.good { border-color: rgba(91,141,239,.4); }
 
-/* EMPTY STATE in admin */
 .empty-state {
   text-align: center;
   padding: 20px;
@@ -515,14 +487,12 @@ body {
 </nav>
 
 <main class="main">
-
   <div class="panel on" id="p-col">
     <div id="groot"></div>
   </div>
 
   <div class="panel" id="p-adm">
     <div class="adm-grid">
-
       <div class="adm-block">
         <div class="adm-block-title">Список игр</div>
         <input class="adm-search" id="asearch" type="text" placeholder="Поиск...">
@@ -535,6 +505,7 @@ body {
           <div class="field"><label>Название</label><input id="fn" type="text" placeholder="Sonic the Hedgehog"></div>
           <div class="field"><label>Год</label><input id="fy" type="text" placeholder="1991"></div>
           <div class="field"><label>Платформа</label><input id="fp" type="text" placeholder="Genesis, PS4..."></div>
+          <div class="field"><label>URL обложки</label><input id="fc" type="text" placeholder="https://..."></div>
           <div class="field">
             <label>Раздел</label>
             <select id="fs">
@@ -561,67 +532,62 @@ body {
         <div class="adm-block-title">Сброс данных</div>
         <div class="danger-row">
           <button class="btn-dng" id="bro">Сбросить галочки</button>
-          <button class="btn-dng" id="brc">Удалить обложки</button>
           <button class="btn-dng" id="bra">Сбросить всё</button>
         </div>
       </div>
-
     </div>
   </div>
-
 </main>
 
 <div class="toast" id="toast"></div>
-<input type="file" id="fup" accept="image/*" style="display:none">
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────
 var DEFAULTS = [
-  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',   sec:'genesis'},
-  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',   sec:'genesis'},
-  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',   sec:'genesis'},
-  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',   sec:'genesis'},
-  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',   sec:'genesis'},
-  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',   sec:'genesis'},
-  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', sec:'dreamcast'},
-  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', sec:'dreamcast'},
-  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',   sec:'dreamcast'},
-  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',   sec:'dreamcast'},
-  {id:'c71',  name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',   sec:'7thgen'},
-  {id:'c72',  name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',   sec:'7thgen'},
-  {id:'c73',  name:'Sonic Colors',                  year:'2010', plat:'Wii',       sec:'7thgen'},
-  {id:'c74',  name:'Sonic Generations',             year:'2011', plat:'PS3/360',   sec:'7thgen'},
-  {id:'c75',  name:'Sonic Lost World',              year:'2013', plat:'Wii U',     sec:'7thgen'},
-  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     sec:'modern'},
-  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     sec:'modern'},
-  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     sec:'modern'},
-  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     sec:'remaster'},
-  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     sec:'remaster'},
-  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     sec:'remaster'},
-  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear', sec:'gamegear'},
-  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear', sec:'gamegear'},
-  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear', sec:'gamegear'},
-  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear', sec:'gamegear'},
-  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',       sec:'gba'},
-  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',       sec:'gba'},
-  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',       sec:'gba'},
-  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',       sec:'gba'},
-  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',        sec:'ds'},
-  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',        sec:'ds'},
-  {id:'ds3',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',       sec:'ds'},
-  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',       sec:'wii'},
-  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',       sec:'wii'},
-  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',     sec:'racing'},
-  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',     sec:'racing'},
-  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',  sec:'racing'},
-  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     sec:'racing'},
-  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     sec:'racing'},
-  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     sec:'racing'},
-  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     sec:'mania'},
-  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     sec:'mania'},
-  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',    sec:'mobile'},
-  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',    sec:'mobile'},
-  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',    sec:'mobile'}
+  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',   sec:'genesis',   cover:''},
+  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',   sec:'genesis',   cover:''},
+  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',   sec:'genesis',   cover:''},
+  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',   sec:'genesis',   cover:''},
+  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',   sec:'genesis',   cover:''},
+  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',   sec:'genesis',   cover:''},
+  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', sec:'dreamcast', cover:''},
+  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', sec:'dreamcast', cover:''},
+  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',   sec:'dreamcast', cover:''},
+  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',   sec:'dreamcast', cover:''},
+  {id:'c71',  name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',   sec:'7thgen',    cover:''},
+  {id:'c72',  name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',   sec:'7thgen',    cover:''},
+  {id:'c73',  name:'Sonic Colors',                  year:'2010', plat:'Wii',       sec:'7thgen',    cover:''},
+  {id:'c74',  name:'Sonic Generations',             year:'2011', plat:'PS3/360',   sec:'7thgen',    cover:''},
+  {id:'c75',  name:'Sonic Lost World',              year:'2013', plat:'Wii U',     sec:'7thgen',    cover:''},
+  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     sec:'modern',    cover:''},
+  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     sec:'modern',    cover:''},
+  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     sec:'modern',    cover:''},
+  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     sec:'remaster',  cover:''},
+  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     sec:'remaster',  cover:''},
+  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     sec:'remaster',  cover:''},
+  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear', sec:'gamegear',  cover:''},
+  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear', sec:'gamegear',  cover:''},
+  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear', sec:'gamegear',  cover:''},
+  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear', sec:'gamegear',  cover:''},
+  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',       sec:'gba',       cover:''},
+  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',       sec:'gba',       cover:''},
+  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',       sec:'gba',       cover:''},
+  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',       sec:'gba',       cover:''},
+  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',        sec:'ds',        cover:''},
+  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',        sec:'ds',        cover:''},
+  {id:'ds3',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',       sec:'ds',        cover:''},
+  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',       sec:'wii',       cover:''},
+  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',       sec:'wii',       cover:''},
+  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',     sec:'racing',    cover:''},
+  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',     sec:'racing',    cover:''},
+  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',  sec:'racing',    cover:''},
+  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     sec:'racing',    cover:''},
+  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     sec:'racing',    cover:''},
+  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     sec:'racing',    cover:''},
+  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     sec:'mania',     cover:''},
+  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     sec:'mania',     cover:''},
+  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',    sec:'mobile',    cover:''},
+  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',    sec:'mobile',    cover:''},
+  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',    sec:'mobile',    cover:''}
 ];
 
 var SEC_LABEL = {
@@ -631,7 +597,6 @@ var SEC_LABEL = {
 };
 var SEC_ORDER = ['genesis','dreamcast','7thgen','modern','remaster','gamegear','gba','ds','wii','racing','mania','mobile','other'];
 
-// ── STATE ─────────────────────────────────────────────────────────────────
 function lsGet(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e) { return d; } }
 function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { showToast('Ошибка сохранения'); } }
 
@@ -639,61 +604,6 @@ var games = lsGet('rcol_g', null);
 if (!games) { games = JSON.parse(JSON.stringify(DEFAULTS)); lsSet('rcol_g', games); }
 var owned = lsGet('rcol_o', []);
 
-// ── INDEXEDDB ─────────────────────────────────────────────────────────────
-var db = null;
-var coverURLs = {};
-
-function openDB(cb) {
-  var req = indexedDB.open('RitaCol2', 1);
-  req.onupgradeneeded = function(e) { e.target.result.createObjectStore('covers'); };
-  req.onsuccess = function(e) { db = e.target.result; cb(); };
-  req.onerror = function() { cb(); };
-}
-function dbSave(id, blob, cb) {
-  if (!db) { cb && cb(); return; }
-  var tx = db.transaction('covers', 'readwrite');
-  tx.objectStore('covers').put(blob, id);
-  tx.oncomplete = function() { cb && cb(); };
-  tx.onerror = function() { cb && cb(); };
-}
-function dbLoad(id, cb) {
-  if (!db) { cb(null); return; }
-  var tx = db.transaction('covers', 'readonly');
-  var r = tx.objectStore('covers').get(id);
-  r.onsuccess = function(e) { cb(e.target.result || null); };
-  r.onerror = function() { cb(null); };
-}
-function dbDel(id, cb) {
-  if (!db) { cb && cb(); return; }
-  var tx = db.transaction('covers', 'readwrite');
-  tx.objectStore('covers').delete(id);
-  tx.oncomplete = function() { cb && cb(); };
-}
-function dbClear(cb) {
-  if (!db) { cb && cb(); return; }
-  var tx = db.transaction('covers', 'readwrite');
-  tx.objectStore('covers').clear();
-  tx.oncomplete = function() { cb && cb(); };
-}
-function dbKeys(cb) {
-  if (!db) { cb([]); return; }
-  var tx = db.transaction('covers', 'readonly');
-  var r = tx.objectStore('covers').getAllKeys();
-  r.onsuccess = function(e) { cb(e.target.result || []); };
-  r.onerror = function() { cb([]); };
-}
-function preloadAll(ids, cb) {
-  var left = ids.length;
-  if (!left) { cb(); return; }
-  ids.forEach(function(id) {
-    dbLoad(id, function(blob) {
-      if (blob) { if (coverURLs[id]) URL.revokeObjectURL(coverURLs[id]); coverURLs[id] = URL.createObjectURL(blob); }
-      if (--left === 0) cb();
-    });
-  });
-}
-
-// ── TOAST ─────────────────────────────────────────────────────────────────
 var _tt = null;
 function showToast(msg, good) {
   var el = document.getElementById('toast');
@@ -703,7 +613,6 @@ function showToast(msg, good) {
   _tt = setTimeout(function() { el.classList.remove('show'); }, 2200);
 }
 
-// ── TABS ──────────────────────────────────────────────────────────────────
 document.querySelectorAll('.nav-tab').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('on'); });
@@ -714,7 +623,6 @@ document.querySelectorAll('.nav-tab').forEach(function(btn) {
   });
 });
 
-// ── PLACEHOLDER ───────────────────────────────────────────────────────────
 function makePh(game) {
   var d = document.createElement('div'); d.className = 'gph';
   var ico = document.createElement('div'); ico.className = 'gph-icon'; ico.textContent = '◈';
@@ -723,22 +631,25 @@ function makePh(game) {
   return d;
 }
 
-// ── COVER IN WRAP ─────────────────────────────────────────────────────────
 function fillCover(wrap, game) {
   var dot = wrap.querySelector('.owned-dot');
   Array.from(wrap.childNodes).forEach(function(n) { if (n !== dot) wrap.removeChild(n); });
-  var url = coverURLs[game.id];
-  if (url) {
+  if (game.cover) {
     var img = document.createElement('img');
-    img.src = url; img.alt = game.name;
-    img.onerror = function() { if (img.parentNode === wrap) { wrap.removeChild(img); wrap.insertBefore(makePh(game), dot); } };
+    img.src = game.cover;
+    img.alt = game.name;
+    img.onerror = function() {
+      if (img.parentNode === wrap) {
+        wrap.removeChild(img);
+        wrap.insertBefore(makePh(game), dot);
+      }
+    };
     wrap.insertBefore(img, dot);
   } else {
     wrap.insertBefore(makePh(game), dot);
   }
 }
 
-// ── GAME CARD ─────────────────────────────────────────────────────────────
 function makeCard(game) {
   var isOwned = owned.indexOf(game.id) !== -1;
   var card = document.createElement('div');
@@ -763,7 +674,6 @@ function makeCard(game) {
   return card;
 }
 
-// ── RENDER COLLECTION ─────────────────────────────────────────────────────
 function renderCol() {
   var root = document.getElementById('groot');
   root.innerHTML = '';
@@ -793,7 +703,6 @@ function renderCol() {
   updateStats();
 }
 
-// ── TOGGLE ────────────────────────────────────────────────────────────────
 function toggleOwned(id) {
   var idx = owned.indexOf(id);
   if (idx === -1) owned.push(id); else owned.splice(idx, 1);
@@ -804,12 +713,10 @@ function toggleOwned(id) {
   var tog = document.getElementById('at-' + id);
   if (tog) tog.checked = isOn;
   updateStats();
-  // Re-render section counts
   renderSecCounts();
 }
 
 function renderSecCounts() {
-  // Update count labels in section headers
   var grouped = {};
   games.forEach(function(g) { var s = g.sec||'other'; if(!grouped[s]) grouped[s]=[]; grouped[s].push(g); });
   document.querySelectorAll('.sec-count').forEach(function(el, i) {
@@ -827,9 +734,6 @@ function updateStats() {
   document.getElementById('h-bar').style.width = (total ? (count/total*100).toFixed(1) : 0) + '%';
 }
 
-// ── ADMIN ─────────────────────────────────────────────────────────────────
-var uploadId = null;
-
 function renderAdmin(filter) {
   var list = document.getElementById('alist');
   list.innerHTML = '';
@@ -843,16 +747,19 @@ function renderAdmin(filter) {
     var row = document.createElement('div'); row.className = 'adm-row';
 
     var thumb = document.createElement('div'); thumb.className = 'adm-thumb';
-    var url = coverURLs[game.id];
-    if (url) { var ti = document.createElement('img'); ti.src = url; thumb.appendChild(ti); }
-    else { thumb.textContent = '◈'; }
-    var hov = document.createElement('div'); hov.className = 'adm-hover'; hov.textContent = 'ЗАГРУЗИТЬ';
-    thumb.appendChild(hov);
-    thumb.addEventListener('click', function() { uploadId = game.id; document.getElementById('fup').click(); });
+    if (game.cover) {
+      var ti = document.createElement('img');
+      ti.src = game.cover;
+      ti.alt = game.name;
+      thumb.appendChild(ti);
+    } else {
+      thumb.textContent = '◈';
+    }
 
     var inf = document.createElement('div'); inf.className = 'adm-inf';
     var anm = document.createElement('div'); anm.className = 'adm-name'; anm.textContent = game.name;
-    var sub = document.createElement('div'); sub.className = 'adm-sub'; sub.textContent = game.year + ' · ' + game.plat;
+    var sub = document.createElement('div'); sub.className = 'adm-sub';
+    sub.textContent = game.year + ' · ' + game.plat + (game.cover ? ' · URL задан' : ' · URL пустой');
     inf.appendChild(anm); inf.appendChild(sub);
 
     var acts = document.createElement('div'); acts.className = 'adm-acts';
@@ -871,11 +778,8 @@ function renderAdmin(filter) {
       games = games.filter(function(g) { return g.id !== game.id; });
       owned = owned.filter(function(i) { return i !== game.id; });
       lsSet('rcol_g', games); lsSet('rcol_o', owned);
-      dbDel(game.id, function() {
-        if (coverURLs[game.id]) { URL.revokeObjectURL(coverURLs[game.id]); delete coverURLs[game.id]; }
-        renderCol(); renderAdmin(document.getElementById('asearch').value);
-        showToast('Удалено: ' + game.name);
-      });
+      renderCol(); renderAdmin(document.getElementById('asearch').value);
+      showToast('Удалено: ' + game.name);
     });
 
     acts.appendChild(tl); acts.appendChild(del);
@@ -886,64 +790,44 @@ function renderAdmin(filter) {
 
 document.getElementById('asearch').addEventListener('input', function() { renderAdmin(this.value); });
 
-// ── FILE UPLOAD ───────────────────────────────────────────────────────────
-document.getElementById('fup').addEventListener('change', function() {
-  var file = this.files[0]; this.value = '';
-  if (!file || !uploadId) return;
-  var id = uploadId; uploadId = null;
-  dbSave(id, file, function() {
-    if (coverURLs[id]) URL.revokeObjectURL(coverURLs[id]);
-    coverURLs[id] = URL.createObjectURL(file);
-    var card = document.getElementById('gc-' + id);
-    if (card) { var g = games.find(function(x){return x.id===id;}); if(g) fillCover(card.querySelector('.gcover'),g); }
-    renderAdmin(document.getElementById('asearch').value);
-    showToast('Обложка сохранена', true);
-  });
-});
-
-// ── ADD ───────────────────────────────────────────────────────────────────
 document.getElementById('badd').addEventListener('click', function() {
   var name = document.getElementById('fn').value.trim();
   if (!name) { showToast('Введи название игры'); return; }
-  var g = { id:'u'+Date.now(), name:name, year:document.getElementById('fy').value.trim()||'—', plat:document.getElementById('fp').value.trim()||'—', sec:document.getElementById('fs').value };
+  var g = {
+    id:'u'+Date.now(),
+    name:name,
+    year:document.getElementById('fy').value.trim()||'—',
+    plat:document.getElementById('fp').value.trim()||'—',
+    sec:document.getElementById('fs').value,
+    cover:document.getElementById('fc').value.trim()||''
+  };
   games.push(g); lsSet('rcol_g', games);
-  document.getElementById('fn').value = ''; document.getElementById('fy').value = ''; document.getElementById('fp').value = '';
+  document.getElementById('fn').value = '';
+  document.getElementById('fy').value = '';
+  document.getElementById('fp').value = '';
+  document.getElementById('fc').value = '';
   renderCol(); renderAdmin(document.getElementById('asearch').value);
   showToast('Добавлено: ' + g.name, true);
 });
 
-// ── RESETS ────────────────────────────────────────────────────────────────
 document.getElementById('bro').addEventListener('click', function() {
   if (!confirm('Сбросить все галочки?')) return;
   owned = []; lsSet('rcol_o', owned);
   renderCol(); renderAdmin(document.getElementById('asearch').value);
   showToast('Галочки сброшены');
 });
-document.getElementById('brc').addEventListener('click', function() {
-  if (!confirm('Удалить все обложки?')) return;
-  dbClear(function() {
-    Object.keys(coverURLs).forEach(function(k) { URL.revokeObjectURL(coverURLs[k]); }); coverURLs = {};
-    renderCol(); renderAdmin(document.getElementById('asearch').value);
-    showToast('Обложки удалены');
-  });
-});
+
 document.getElementById('bra').addEventListener('click', function() {
   if (!confirm('Сбросить всё? Игры вернутся к стандартным.')) return;
-  dbClear(function() {
-    Object.keys(coverURLs).forEach(function(k) { URL.revokeObjectURL(coverURLs[k]); }); coverURLs = {};
-    games = JSON.parse(JSON.stringify(DEFAULTS)); owned = [];
-    lsSet('rcol_g', games); lsSet('rcol_o', owned);
-    renderCol(); renderAdmin('');
-    showToast('Сброшено');
-  });
+  games = JSON.parse(JSON.stringify(DEFAULTS));
+  owned = [];
+  lsSet('rcol_g', games);
+  lsSet('rcol_o', owned);
+  renderCol(); renderAdmin('');
+  showToast('Сброшено');
 });
 
-// ── INIT ──────────────────────────────────────────────────────────────────
-openDB(function() {
-  dbKeys(function(ids) {
-    preloadAll(ids, function() { renderCol(); });
-  });
-});
+renderCol();
 </script>
 </body>
 </html>
