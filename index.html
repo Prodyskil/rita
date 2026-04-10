@@ -14,262 +14,210 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
 
-/* SETUP SCREEN */
-.setup-screen{
-  position:fixed;inset:0;background:var(--bg);z-index:1000;
-  display:flex;align-items:center;justify-content:center;padding:20px;
-}
+/* SETUP */
+.setup-screen{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
 .setup-screen.hidden{display:none;}
-.setup-box{
-  background:var(--surface);border:1px solid var(--border2);border-radius:14px;
-  padding:36px 40px;width:100%;max-width:480px;
-}
+.setup-box{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:36px 40px;width:100%;max-width:440px;}
+@media(max-width:500px){.setup-box{padding:28px 22px;}}
 .setup-logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:6px;}
 .setup-logo span{color:var(--accent);}
-.setup-sub{font-size:.82rem;color:var(--dim);margin-bottom:28px;line-height:1.6;}
-.setup-step{
-  display:flex;gap:14px;margin-bottom:20px;align-items:flex-start;
-}
-.step-num{
-  width:26px;height:26px;border-radius:50%;background:var(--accent);
-  color:#fff;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
-}
-.step-body{flex:1;}
-.step-title{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:4px;}
-.step-desc{font-size:.75rem;color:var(--dim);line-height:1.5;}
-.step-desc a{color:var(--accent);text-decoration:none;}
-.step-desc a:hover{text-decoration:underline;}
-.step-input{
-  margin-top:8px;width:100%;background:var(--bg);border:1px solid var(--border2);
-  border-radius:7px;color:var(--text);font-family:'Outfit',sans-serif;
-  font-size:.88rem;padding:9px 12px;outline:none;transition:border-color .2s;
-}
-.step-input:focus{border-color:var(--accent);}
-.step-input::placeholder{color:var(--dim);opacity:.5;}
-.setup-btn{
-  width:100%;margin-top:24px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;padding:13px;
-  background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;
-  transition:opacity .2s;
-}
+.setup-sub{font-size:.82rem;color:var(--dim);margin-bottom:26px;line-height:1.65;}
+.step{display:flex;gap:14px;margin-bottom:22px;align-items:flex-start;}
+.step-n{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-b{flex:1;}
+.step-t{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:4px;}
+.step-d{font-size:.76rem;color:var(--dim);line-height:1.55;}
+.step-d a{color:var(--accent);text-decoration:none;}
+.step-d a:hover{text-decoration:underline;}
+.step-d code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-size:.78rem;}
+.step-inp{margin-top:10px;width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:10px 13px;outline:none;transition:border-color .2s;}
+.step-inp:focus{border-color:var(--accent);}
+.step-inp::placeholder{color:var(--dim);opacity:.5;}
+.setup-btn{width:100%;margin-top:22px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s;}
 .setup-btn:hover{opacity:.85;}
-.setup-err{font-size:.75rem;color:#ef9a9a;margin-top:10px;display:none;text-align:center;}
+.setup-btn:disabled{opacity:.5;cursor:not-allowed;}
+.setup-err{font-size:.76rem;color:#ef9a9a;margin-top:12px;display:none;text-align:center;line-height:1.5;}
 
 /* BANNER */
-.banner{
-  background:rgba(91,141,239,.08);border-bottom:1px solid rgba(91,141,239,.2);
-  padding:10px 40px;font-size:.78rem;color:var(--accent);display:flex;
-  align-items:center;justify-content:space-between;gap:10px;
-}
-.banner.hidden{display:none;}
-.banner-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;box-shadow:0 0 6px var(--green);}
-.banner-dot.err{background:var(--danger);box-shadow:0 0 6px var(--danger);}
-.banner-right{display:flex;align-items:center;gap:10px;}
-.banner-reset{font-size:.68rem;color:var(--dim);background:none;border:none;cursor:pointer;text-decoration:underline;}
-.banner-reset:hover{color:var(--text);}
+.banner{background:rgba(91,141,239,.07);border-bottom:1px solid rgba(91,141,239,.18);padding:9px 40px;font-size:.78rem;color:var(--accent);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+@media(max-width:640px){.banner{padding:9px 20px;}}
+.b-left{display:flex;align-items:center;gap:8px;}
+.b-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.b-reset{font-size:.68rem;color:var(--dim);background:none;border:none;cursor:pointer;text-decoration:underline;}
+.b-reset:hover{color:var(--text);}
 
 /* HEADER */
-.site-header{padding:32px 40px 0;max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;}
-.site-title{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;}
+.site-header{padding:30px 40px 0;max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;}
+@media(max-width:640px){.site-header{padding:22px 20px 0;flex-direction:column;align-items:flex-start;}}
+.site-title{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;}
 .site-title span{color:var(--accent);}
-.site-sub{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:6px;}
-.header-stat{text-align:right;flex-shrink:0;}
-.header-stat .big{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;}
-.header-stat .lbl{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-top:3px;}
-.prog-line{width:140px;height:2px;background:var(--border2);border-radius:2px;margin-top:8px;margin-left:auto;overflow:hidden;}
-.prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width .6s ease;}
+.site-sub{font-family:'Syne',sans-serif;font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:5px;}
+.hstat{text-align:right;flex-shrink:0;}
+@media(max-width:640px){.hstat{text-align:left;}}
+.hstat .big{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:#fff;line-height:1;}
+.hstat .lbl{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-top:3px;}
+.pline{width:130px;height:2px;background:var(--border2);border-radius:2px;margin-top:7px;margin-left:auto;overflow:hidden;}
+@media(max-width:640px){.pline{margin-left:0;}}
+.pfill{height:100%;background:var(--green);border-radius:2px;transition:width .6s ease;}
 
 /* NAV */
-.site-nav{max-width:1200px;margin:0 auto;padding:26px 40px 0;display:flex;border-bottom:1px solid var(--border);}
-.nav-tab{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:none;border:none;border-bottom:2px solid transparent;padding:12px 20px 12px 0;margin-bottom:-1px;cursor:pointer;transition:color .2s,border-color .2s;}
-.nav-tab:hover{color:var(--text);}
-.nav-tab.on{color:#fff;border-bottom-color:var(--accent);}
+.site-nav{max-width:1200px;margin:0 auto;padding:24px 40px 0;display:flex;border-bottom:1px solid var(--border);}
+@media(max-width:640px){.site-nav{padding:18px 20px 0;}}
+.ntab{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:none;border:none;border-bottom:2px solid transparent;padding:11px 18px 11px 0;margin-bottom:-1px;cursor:pointer;transition:color .2s,border-color .2s;}
+.ntab:hover{color:var(--text);}
+.ntab.on{color:#fff;border-bottom-color:var(--accent);}
 
 /* MAIN */
-.main{max-width:1200px;margin:0 auto;padding:32px 40px 60px;}
-@media(max-width:640px){
-  .setup-box{padding:28px 22px;}
-  .banner{padding:10px 20px;}
-  .site-header{padding:24px 20px 0;flex-direction:column;align-items:flex-start;}
-  .header-stat{text-align:left;}.prog-line{margin-left:0;}
-  .site-nav{padding:18px 20px 0;}
-  .main{padding:24px 20px 50px;}
-}
+.main{max-width:1200px;margin:0 auto;padding:30px 40px 60px;}
+@media(max-width:640px){.main{padding:22px 20px 50px;}}
 .panel{display:none;}
-.panel.on{display:block;animation:appear .2s ease;}
-@keyframes appear{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+.panel.on{display:block;animation:ap .2s ease;}
+@keyframes ap{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
 
-/* SECTION */
-.sec-head{display:flex;align-items:baseline;gap:12px;margin:36px 0 16px;}
-.sec-head:first-child{margin-top:0;}
-.sec-name{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);white-space:nowrap;}
-.sec-line{flex:1;height:1px;background:var(--border);}
-.sec-count{font-family:'Syne',sans-serif;font-size:.6rem;font-weight:600;color:var(--dim);opacity:.6;white-space:nowrap;}
+/* SECTIONS */
+.seh{display:flex;align-items:baseline;gap:12px;margin:34px 0 14px;}
+.seh:first-child{margin-top:0;}
+.sename{font-family:'Syne',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);white-space:nowrap;}
+.seline{flex:1;height:1px;background:var(--border);}
+.secnt{font-family:'Syne',sans-serif;font-size:.6rem;font-weight:600;color:var(--dim);opacity:.55;white-space:nowrap;}
 
-/* GAME GRID */
-.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px;}
-
-.gcard{border-radius:8px;background:var(--surface);border:1px solid var(--border);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:border-color .25s,transform .2s,box-shadow .25s,filter .3s,opacity .3s;position:relative;}
-
-/* Unowned */
-.gcard:not(.owned) .gcover{filter:grayscale(1) brightness(.65);}
+/* CARDS */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:10px;}
+.gcard{border-radius:8px;background:var(--surface);border:1px solid var(--border);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:border-color .25s,transform .2s,box-shadow .25s;position:relative;}
+.gcard:not(.owned){opacity:.6;}
+.gcard:not(.owned) .gcov{filter:grayscale(1) brightness(.65);transition:filter .3s;}
 .gcard:not(.owned) .gname{color:var(--dim);}
-.gcard:not(.owned){opacity:.65;}
 .gcard:not(.owned):hover{opacity:1;border-color:var(--border2);transform:translateY(-2px);}
-.gcard:not(.owned):hover .gcover{filter:grayscale(.4) brightness(.8);}
-
-/* Owned */
-.gcard.owned{border-color:rgba(76,175,125,.4);box-shadow:0 0 0 1px rgba(76,175,125,.12),0 6px 20px rgba(0,0,0,.3);opacity:1;}
-.gcard.owned:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 0 0 1px rgba(76,175,125,.3),0 12px 28px rgba(0,0,0,.4);}
-.gcard.owned .gcover{filter:none;}
+.gcard:not(.owned):hover .gcov{filter:grayscale(.35) brightness(.82);}
+.gcard.owned{border-color:rgba(76,175,125,.42);box-shadow:0 0 0 1px rgba(76,175,125,.1),0 6px 18px rgba(0,0,0,.28);opacity:1;}
+.gcard.owned:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 0 0 1px rgba(76,175,125,.28),0 10px 26px rgba(0,0,0,.38);}
+.gcard.owned .gcov{filter:none;}
 .gcard.owned .gname{color:#fff;}
-
-.gcover{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--panel);position:relative;flex-shrink:0;transition:filter .3s;}
-.gcover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
-.gcard:hover .gcover img{transform:scale(1.05);}
-.gph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--panel);}
-.gph-icon{font-size:1.5rem;opacity:.2;}
-.gph-name{font-family:'Syne',sans-serif;font-size:.46rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);text-align:center;padding:0 8px;line-height:1.5;opacity:.6;}
-.owned-badge{position:absolute;top:7px;right:7px;width:20px;height:20px;border-radius:50%;background:var(--green);display:none;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#fff;box-shadow:0 2px 8px rgba(76,175,125,.4);}
-.gcard.owned .owned-badge{display:flex;}
-.ginfo{padding:9px 10px 10px;display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--border);}
-.gname{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;color:var(--dim);line-height:1.3;transition:color .25s;}
+.gcov{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--panel);position:relative;flex-shrink:0;}
+.gcov img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
+.gcard:hover .gcov img{transform:scale(1.05);}
+.gph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:var(--panel);}
+.gphi{font-size:1.4rem;opacity:.18;}
+.gphn{font-family:'Syne',sans-serif;font-size:.45rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);text-align:center;padding:0 8px;line-height:1.5;opacity:.55;}
+.obadge{position:absolute;top:6px;right:6px;width:19px;height:19px;border-radius:50%;background:var(--green);display:none;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:#fff;box-shadow:0 2px 8px rgba(76,175,125,.4);}
+.gcard.owned .obadge{display:flex;}
+.ginf{padding:8px 9px 9px;display:flex;flex-direction:column;gap:3px;border-top:1px solid var(--border);}
+.gname{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;color:var(--dim);line-height:1.3;transition:color .25s;}
 .gmeta{display:flex;align-items:center;justify-content:space-between;gap:4px;}
-.gyear{font-size:.6rem;color:var(--dim);font-weight:300;opacity:.7;}
-.gplat{font-size:.52rem;color:var(--dim);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:1px 5px;font-family:'Syne',sans-serif;font-weight:600;}
+.gyear{font-size:.59rem;color:var(--dim);font-weight:300;opacity:.65;}
+.gplat{font-size:.51rem;color:var(--dim);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:1px 4px;font-family:'Syne',sans-serif;font-weight:600;}
 
 /* ADMIN */
-.adm-grid{display:flex;flex-direction:column;gap:22px;}
-.adm-block{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px 24px;}
-.adm-title{font-family:'Syne',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);}
-.adm-search{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.88rem;padding:9px 14px;outline:none;margin-bottom:14px;transition:border-color .2s;}
-.adm-search:focus{border-color:var(--accent);}
-.adm-search::placeholder{color:var(--dim);opacity:.5;}
-.adm-list{display:flex;flex-direction:column;gap:6px;max-height:400px;overflow-y:auto;padding-right:4px;}
-.adm-list::-webkit-scrollbar{width:3px;}
-.adm-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
-.adm-row{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:6px;border:1px solid var(--border);background:var(--panel);transition:border-color .15s;}
-.adm-row:hover{border-color:var(--border2);}
-.adm-thumb{width:32px;height:43px;border-radius:4px;background:var(--bg);flex-shrink:0;overflow:hidden;border:1px solid var(--border2);position:relative;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--dim);}
-.adm-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.adm-inf{flex:1;min-width:0;}
-.adm-name{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
-.adm-sub{font-size:.62rem;color:var(--dim);margin-top:2px;font-weight:300;}
-.adm-acts{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.tog{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;}
+.admg{display:flex;flex-direction:column;gap:20px;}
+.admb{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 22px;}
+.admt{font-family:'Syne',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.asrch{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.88rem;padding:9px 13px;outline:none;margin-bottom:12px;transition:border-color .2s;}
+.asrch:focus{border-color:var(--accent);}
+.asrch::placeholder{color:var(--dim);opacity:.5;}
+.alist{display:flex;flex-direction:column;gap:5px;max-height:390px;overflow-y:auto;padding-right:3px;}
+.alist::-webkit-scrollbar{width:3px;}
+.alist::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+.arow{display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:6px;border:1px solid var(--border);background:var(--panel);}
+.arow:hover{border-color:var(--border2);}
+.athumb{width:30px;height:40px;border-radius:4px;background:var(--bg);flex-shrink:0;overflow:hidden;border:1px solid var(--border2);position:relative;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--dim);}
+.athumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ainf{flex:1;min-width:0;}
+.aname{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
+.asub{font-size:.61rem;color:var(--dim);margin-top:1px;font-weight:300;}
+.aacts{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.tog{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none;}
 .tog input{display:none;}
-.tog-track{width:30px;height:16px;border-radius:999px;background:var(--bg);border:1px solid var(--border2);position:relative;flex-shrink:0;transition:background .2s,border-color .2s;}
-.tog-track::after{content:'';position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--dim);transition:all .2s;}
-.tog input:checked~.tog-track{background:rgba(76,175,125,.15);border-color:var(--green);}
-.tog input:checked~.tog-track::after{transform:translateX(14px);background:var(--green);}
-.tog-lbl{font-size:.63rem;color:var(--dim);font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.05em;}
-.btn-url{background:none;border:1px solid var(--border2);color:var(--dim);border-radius:4px;padding:3px 8px;font-size:.62rem;cursor:pointer;font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.04em;transition:all .15s;white-space:nowrap;}
-.btn-url:hover{border-color:var(--accent);color:var(--accent);}
-.btn-url.has{border-color:rgba(76,175,125,.4);color:var(--green);}
-.btn-url.has:hover{border-color:var(--green);}
-.btn-del{background:none;border:1px solid rgba(192,84,74,.2);color:rgba(192,84,74,.6);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.72rem;cursor:pointer;transition:all .15s;flex-shrink:0;}
-.btn-del:hover{border-color:var(--danger);color:var(--danger);background:rgba(192,84,74,.07);}
+.togtr{width:28px;height:15px;border-radius:999px;background:var(--bg);border:1px solid var(--border2);position:relative;flex-shrink:0;transition:background .2s,border-color .2s;}
+.togtr::after{content:'';position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--dim);transition:all .2s;}
+.tog input:checked~.togtr{background:rgba(76,175,125,.15);border-color:var(--green);}
+.tog input:checked~.togtr::after{transform:translateX(13px);background:var(--green);}
+.togl{font-size:.61rem;color:var(--dim);font-family:'Syne',sans-serif;font-weight:600;letter-spacing:.04em;}
+.burlt{background:none;border:1px solid var(--border2);color:var(--dim);border-radius:4px;padding:3px 7px;font-size:.6rem;cursor:pointer;font-family:'Syne',sans-serif;font-weight:600;transition:all .15s;white-space:nowrap;}
+.burlt:hover{border-color:var(--accent);color:var(--accent);}
+.burlt.has{border-color:rgba(76,175,125,.38);color:var(--green);}
+.burlt.has:hover{border-color:var(--green);}
+.bdel{background:none;border:1px solid rgba(192,84,74,.18);color:rgba(192,84,74,.55);border-radius:4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0;}
+.bdel:hover{border-color:var(--danger);color:var(--danger);background:rgba(192,84,74,.07);}
 
 /* ADD FORM */
-.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-@media(max-width:520px){.add-grid{grid-template-columns:1fr;}}
-.field{display:flex;flex-direction:column;gap:5px;}
-.field label{font-family:'Syne',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
-.field input,.field select{background:var(--bg);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.88rem;padding:9px 12px;outline:none;transition:border-color .2s;}
-.field input:focus,.field select:focus{border-color:var(--accent);}
-.field input::placeholder{color:var(--dim);opacity:.5;}
-.field select option{background:#1a1a22;}
-.field.span2{grid-column:1/-1;}
-.btn-add{margin-top:14px;font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:opacity .2s,transform .15s;}
-.btn-add:hover{opacity:.85;transform:translateY(-1px);}
-.btn-dng{font-family:'Syne',sans-serif;font-size:.63rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;background:transparent;color:rgba(192,84,74,.7);border:1px solid rgba(192,84,74,.22);border-radius:6px;cursor:pointer;transition:all .2s;}
-.btn-dng:hover{color:var(--danger);border-color:var(--danger);background:rgba(192,84,74,.06);}
-.danger-row{display:flex;gap:10px;flex-wrap:wrap;}
+.addg{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+@media(max-width:520px){.addg{grid-template-columns:1fr;}}
+.ff{display:flex;flex-direction:column;gap:4px;}
+.ff label{font-family:'Syne',sans-serif;font-size:.59rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.ff input,.ff select{background:var(--bg);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.87rem;padding:8px 11px;outline:none;transition:border-color .2s;}
+.ff input:focus,.ff select:focus{border-color:var(--accent);}
+.ff input::placeholder{color:var(--dim);opacity:.45;}
+.ff select option{background:#1a1a22;}
+.ff.s2{grid-column:1/-1;}
+.badd{margin-top:12px;font-family:'Syne',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:opacity .2s,transform .15s;}
+.badd:hover{opacity:.85;transform:translateY(-1px);}
+.bdng{font-family:'Syne',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;background:transparent;color:rgba(192,84,74,.65);border:1px solid rgba(192,84,74,.2);border-radius:6px;cursor:pointer;transition:all .2s;}
+.bdng:hover{color:var(--danger);border-color:var(--danger);background:rgba(192,84,74,.06);}
+.drow{display:flex;gap:10px;flex-wrap:wrap;}
 
 /* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
-.modal-overlay.hidden{display:none;}
-.modal{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:28px;width:100%;max-width:440px;}
-.modal-title{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
-.modal-game{font-family:'Syne',sans-serif;font-size:.98rem;font-weight:700;color:#fff;margin-bottom:16px;}
-.modal-input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:10px 14px;outline:none;margin-bottom:8px;transition:border-color .2s;}
-.modal-input:focus{border-color:var(--accent);}
-.modal-input::placeholder{color:var(--dim);opacity:.5;}
-.modal-preview{width:100%;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:var(--bg);border:1px solid var(--border);margin-bottom:16px;display:flex;align-items:center;justify-content:center;}
-.modal-preview img{width:100%;height:100%;object-fit:contain;display:none;}
-.modal-preview .no-prev{font-size:.78rem;color:var(--dim);opacity:.4;}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end;}
-.m-save{font-family:'Syne',sans-serif;font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;}
-.m-save:hover{opacity:.85;}
-.m-clear{font-family:'Syne',sans-serif;font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;background:transparent;color:var(--dim);border:1px solid var(--border2);border-radius:6px;cursor:pointer;}
-.m-clear:hover{color:var(--danger);border-color:rgba(192,84,74,.4);}
-.m-cancel{font-family:'Syne',sans-serif;font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;background:transparent;color:var(--dim);border:none;cursor:pointer;}
+.mover{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.mover.hidden{display:none;}
+.mbox{background:var(--panel);border:1px solid var(--border2);border-radius:12px;padding:26px;width:100%;max-width:420px;}
+.mtitle{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.mgame{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:14px;}
+.minp{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.9rem;padding:10px 13px;outline:none;margin-bottom:8px;transition:border-color .2s;}
+.minp:focus{border-color:var(--accent);}
+.minp::placeholder{color:var(--dim);opacity:.45;}
+.mprev{width:100%;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:var(--bg);border:1px solid var(--border);margin-bottom:14px;display:flex;align-items:center;justify-content:center;}
+.mprev img{width:100%;height:100%;object-fit:contain;display:none;}
+.mprev .mnp{font-size:.76rem;color:var(--dim);opacity:.4;}
+.mbtns{display:flex;gap:8px;justify-content:flex-end;}
+.msave{font-family:'Syne',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.msave:hover{opacity:.85;}
+.mclr{font-family:'Syne',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 13px;background:transparent;color:var(--dim);border:1px solid var(--border2);border-radius:6px;cursor:pointer;}
+.mclr:hover{color:var(--danger);border-color:rgba(192,84,74,.4);}
+.mcan{font-family:'Syne',sans-serif;font-size:.66rem;font-weight:700;padding:9px 13px;background:transparent;color:var(--dim);border:none;cursor:pointer;}
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:11px 18px;font-size:.82rem;color:var(--text);font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:none;opacity:0;transform:translateY(6px);transition:all .25s;}
+.toast{position:fixed;bottom:22px;right:22px;z-index:200;background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:10px 16px;font-size:.82rem;color:var(--text);font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.5);pointer-events:none;opacity:0;transform:translateY(6px);transition:all .25s;}
 .toast.show{opacity:1;transform:none;}
-.empty-state{text-align:center;padding:20px;color:var(--dim);font-size:.82rem;}
-.saving-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:8px;animation:pulse 1s ease-in-out infinite;vertical-align:middle;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.empty{text-align:center;padding:18px;color:var(--dim);font-size:.82rem;}
 </style>
 </head>
 <body>
 
-<!-- SETUP SCREEN -->
-<div class="setup-screen" id="setup-screen">
+<!-- SETUP -->
+<div class="setup-screen" id="sscr">
   <div class="setup-box">
     <div class="setup-logo">Rita's <span>Collection</span></div>
-    <div class="setup-sub">Настройка займёт 2 минуты. После этого данные будут общими у всех кто откроет страницу.</div>
+    <div class="setup-sub">Одно поле — и все данные будут общими. Хранилище создастся автоматически.</div>
 
-    <div class="setup-step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <div class="step-title">Создай аккаунт на JSONBin</div>
-        <div class="step-desc">
-          Зайди на <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> → нажми <strong>Sign Up</strong> → зарегистрируйся через Google или email.
-        </div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-b">
+        <div class="step-t">Зарегистрируйся на JSONBin</div>
+        <div class="step-d">Зайди на <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> и нажми <strong>Sign Up</strong> (можно через Google).</div>
       </div>
     </div>
 
-    <div class="setup-step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <div class="step-title">Создай хранилище (Bin)</div>
-        <div class="step-desc">
-          После входа нажми <strong>NEW BIN</strong>, в поле введи <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px;">{}</code> и нажми <strong>Create</strong>. В адресной строке будет URL вида <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px;">.../b/64abc123...</code> — это и есть твой Bin ID.
-        </div>
-        <input class="step-input" id="inp-binid" type="text" placeholder="Bin ID (пример: 64abc123def456789)">
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-b">
+        <div class="step-t">Скопируй Master Key</div>
+        <div class="step-d">После входа нажми на своё имя вверху → <strong>API Keys</strong> → скопируй значение из поля <strong>Master Key</strong>.</div>
+        <input class="step-inp" id="inp-key" type="password" placeholder="$2b$10$...">
       </div>
     </div>
 
-    <div class="setup-step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <div class="step-title">Скопируй API Key</div>
-        <div class="step-desc">
-          В верхнем меню нажми на своё имя → <strong>API Keys</strong> → скопируй <strong>Master Key</strong>.
-        </div>
-        <input class="step-input" id="inp-key" type="password" placeholder="Master Key (начинается с $2b$...)">
-      </div>
-    </div>
-
-    <button class="setup-btn" id="setup-btn">Готово — подключить</button>
-    <div class="setup-err" id="setup-err">Не удалось подключиться. Проверь Bin ID и API Key.</div>
+    <button class="setup-btn" id="sbtn">Подключить</button>
+    <div class="setup-err" id="serr"></div>
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="app" style="display:none;">
-
   <div class="banner" id="banner">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <div class="banner-dot" id="banner-dot"></div>
-      <span id="banner-text">Синхронизация...</span>
+    <div class="b-left">
+      <div class="b-dot" id="bdot"></div>
+      <span id="btxt">Подключение...</span>
     </div>
-    <div class="banner-right">
-      <button class="banner-reset" id="banner-reset">Сменить подключение</button>
-    </div>
+    <button class="b-reset" id="breset">Сменить ключ</button>
   </div>
 
   <header class="site-header">
@@ -277,60 +225,54 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
       <div class="site-title">Rita's <span>Collection</span></div>
       <div class="site-sub">Sonic the Hedgehog Universe</div>
     </div>
-    <div class="header-stat">
-      <div class="big"><span id="h-owned">0</span> / <span id="h-total">0</span></div>
+    <div class="hstat">
+      <div class="big"><span id="ho">0</span> / <span id="ht">0</span></div>
       <div class="lbl">игр имеется</div>
-      <div class="prog-line"><div class="prog-fill" id="h-bar" style="width:0%"></div></div>
+      <div class="pline"><div class="pfill" id="hbar" style="width:0%"></div></div>
     </div>
   </header>
 
   <nav class="site-nav">
-    <button class="nav-tab on" data-t="col">Коллекция</button>
-    <button class="nav-tab" data-t="adm">Управление</button>
+    <button class="ntab on" data-t="col">Коллекция</button>
+    <button class="ntab" data-t="adm">Управление</button>
   </nav>
 
   <main class="main">
     <div class="panel on" id="p-col"><div id="groot"></div></div>
     <div class="panel" id="p-adm">
-      <div class="adm-grid">
-        <div class="adm-block">
-          <div class="adm-title">Список игр</div>
-          <input class="adm-search" id="asearch" type="text" placeholder="Поиск...">
-          <div class="adm-list" id="alist"></div>
+      <div class="admg">
+        <div class="admb">
+          <div class="admt">Список игр</div>
+          <input class="asrch" id="asrch" type="text" placeholder="Поиск...">
+          <div class="alist" id="alist"></div>
         </div>
-        <div class="adm-block">
-          <div class="adm-title">Добавить игру</div>
-          <div class="add-grid">
-            <div class="field"><label>Название</label><input id="fn" type="text" placeholder="Sonic the Hedgehog"></div>
-            <div class="field"><label>Год</label><input id="fy" type="text" placeholder="1991"></div>
-            <div class="field"><label>Платформа</label><input id="fp" type="text" placeholder="Genesis..."></div>
-            <div class="field">
+        <div class="admb">
+          <div class="admt">Добавить игру</div>
+          <div class="addg">
+            <div class="ff"><label>Название</label><input id="fn" type="text" placeholder="Sonic the Hedgehog"></div>
+            <div class="ff"><label>Год</label><input id="fy" type="text" placeholder="1991"></div>
+            <div class="ff"><label>Платформа</label><input id="fp" type="text" placeholder="Genesis..."></div>
+            <div class="ff">
               <label>Раздел</label>
-              <select id="fs">
-                <option value="genesis">Genesis</option>
-                <option value="dreamcast">Dreamcast</option>
-                <option value="7thgen">7-е поколение</option>
-                <option value="modern">Современные</option>
-                <option value="remaster">Ремастеры</option>
-                <option value="gamegear">Game Gear</option>
-                <option value="gba">GBA</option>
-                <option value="ds">DS / 3DS</option>
-                <option value="wii">Wii</option>
-                <option value="racing">Гонки</option>
-                <option value="mania">Mania</option>
-                <option value="mobile">Мобильные</option>
+              <select id="fsc">
+                <option value="genesis">Genesis</option><option value="dreamcast">Dreamcast</option>
+                <option value="7thgen">7-е поколение</option><option value="modern">Современные</option>
+                <option value="remaster">Ремастеры</option><option value="gamegear">Game Gear</option>
+                <option value="gba">GBA</option><option value="ds">DS / 3DS</option>
+                <option value="wii">Wii</option><option value="racing">Гонки</option>
+                <option value="mania">Mania</option><option value="mobile">Мобильные</option>
                 <option value="other">Другое</option>
               </select>
             </div>
-            <div class="field span2"><label>URL обложки (необязательно)</label><input id="furl" type="text" placeholder="https://..."></div>
+            <div class="ff s2"><label>URL обложки (необязательно)</label><input id="furl" type="text" placeholder="https://..."></div>
           </div>
-          <button class="btn-add" id="badd">Добавить</button>
+          <button class="badd" id="badd">Добавить</button>
         </div>
-        <div class="adm-block">
-          <div class="adm-title">Сброс</div>
-          <div class="danger-row">
-            <button class="btn-dng" id="bro">Сбросить галочки</button>
-            <button class="btn-dng" id="bra">Сбросить всё</button>
+        <div class="admb">
+          <div class="admt">Сброс</div>
+          <div class="drow">
+            <button class="bdng" id="bro">Сбросить галочки</button>
+            <button class="bdng" id="bra">Сбросить всё</button>
           </div>
         </div>
       </div>
@@ -338,17 +280,17 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
   </main>
 </div>
 
-<!-- URL Modal -->
-<div class="modal-overlay hidden" id="modal">
-  <div class="modal">
-    <div class="modal-title">Обложка</div>
-    <div class="modal-game" id="modal-gname"></div>
-    <input class="modal-input" id="modal-url" type="text" placeholder="https://example.com/cover.jpg">
-    <div class="modal-preview"><img id="modal-img" alt=""><div class="no-prev" id="modal-noprev">Введи URL для предпросмотра</div></div>
-    <div class="modal-btns">
-      <button class="m-clear" id="modal-clear">Убрать обложку</button>
-      <button class="m-cancel" id="modal-cancel">Отмена</button>
-      <button class="m-save" id="modal-save">Сохранить</button>
+<!-- MODAL -->
+<div class="mover hidden" id="modal">
+  <div class="mbox">
+    <div class="mtitle">Обложка игры</div>
+    <div class="mgame" id="mgame"></div>
+    <input class="minp" id="murl" type="text" placeholder="https://example.com/cover.jpg">
+    <div class="mprev"><img id="mimg" alt=""><div class="mnp" id="mnp">Введи URL для предпросмотра</div></div>
+    <div class="mbtns">
+      <button class="mclr" id="mclr">Убрать</button>
+      <button class="mcan" id="mcan">Отмена</button>
+      <button class="msave" id="msave">Сохранить</button>
     </div>
   </div>
 </div>
@@ -357,416 +299,326 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 
 <script>
 // ── DEFAULTS ──────────────────────────────────────────────────────────────
-var DEFAULTS = [
-  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',   sec:'genesis',   coverUrl:''},
-  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',   sec:'genesis',   coverUrl:''},
-  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',   sec:'genesis',   coverUrl:''},
-  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',   sec:'genesis',   coverUrl:''},
-  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',   sec:'genesis',   coverUrl:''},
-  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',   sec:'genesis',   coverUrl:''},
-  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', sec:'dreamcast', coverUrl:''},
-  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', sec:'dreamcast', coverUrl:''},
-  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',   sec:'dreamcast', coverUrl:''},
-  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',   sec:'dreamcast', coverUrl:''},
-  {id:'c71',  name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',   sec:'7thgen',    coverUrl:''},
-  {id:'c72',  name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',   sec:'7thgen',    coverUrl:''},
-  {id:'c73',  name:'Sonic Colors',                  year:'2010', plat:'Wii',       sec:'7thgen',    coverUrl:''},
-  {id:'c74',  name:'Sonic Generations',             year:'2011', plat:'PS3/360',   sec:'7thgen',    coverUrl:''},
-  {id:'c75',  name:'Sonic Lost World',              year:'2013', plat:'Wii U',     sec:'7thgen',    coverUrl:''},
-  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     sec:'modern',    coverUrl:''},
-  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     sec:'modern',    coverUrl:''},
-  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     sec:'modern',    coverUrl:''},
-  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     sec:'remaster',  coverUrl:''},
-  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     sec:'remaster',  coverUrl:''},
-  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     sec:'remaster',  coverUrl:''},
-  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
-  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
-  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
-  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
-  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',       sec:'gba',       coverUrl:''},
-  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',       sec:'gba',       coverUrl:''},
-  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',       sec:'gba',       coverUrl:''},
-  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',       sec:'gba',       coverUrl:''},
-  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',        sec:'ds',        coverUrl:''},
-  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',        sec:'ds',        coverUrl:''},
-  {id:'ds3',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',       sec:'ds',        coverUrl:''},
-  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',       sec:'wii',       coverUrl:''},
-  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',       sec:'wii',       coverUrl:''},
-  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',     sec:'racing',    coverUrl:''},
-  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',     sec:'racing',    coverUrl:''},
-  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',  sec:'racing',    coverUrl:''},
-  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     sec:'racing',    coverUrl:''},
-  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     sec:'racing',    coverUrl:''},
-  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     sec:'racing',    coverUrl:''},
-  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     sec:'mania',     coverUrl:''},
-  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     sec:'mania',     coverUrl:''},
-  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',    sec:'mobile',    coverUrl:''},
-  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',    sec:'mobile',    coverUrl:''},
-  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',    sec:'mobile',    coverUrl:''}
+var DEFS = [
+  {id:'sg1', name:'Sonic the Hedgehog',year:'1991',plat:'Genesis',sec:'genesis',coverUrl:''},
+  {id:'sg2', name:'Sonic the Hedgehog 2',year:'1992',plat:'Genesis',sec:'genesis',coverUrl:''},
+  {id:'sg3', name:'Sonic CD',year:'1993',plat:'Sega CD',sec:'genesis',coverUrl:''},
+  {id:'sg4', name:'Sonic the Hedgehog 3',year:'1994',plat:'Genesis',sec:'genesis',coverUrl:''},
+  {id:'sg5', name:'Sonic & Knuckles',year:'1994',plat:'Genesis',sec:'genesis',coverUrl:''},
+  {id:'sg6', name:'Sonic 3D Blast',year:'1996',plat:'Genesis',sec:'genesis',coverUrl:''},
+  {id:'dc1', name:'Sonic Adventure',year:'1998',plat:'Dreamcast',sec:'dreamcast',coverUrl:''},
+  {id:'dc2', name:'Sonic Adventure 2',year:'2001',plat:'Dreamcast',sec:'dreamcast',coverUrl:''},
+  {id:'dc3', name:'Sonic Heroes',year:'2003',plat:'PS2/GCN',sec:'dreamcast',coverUrl:''},
+  {id:'dc4', name:'Shadow the Hedgehog',year:'2005',plat:'PS2/GCN',sec:'dreamcast',coverUrl:''},
+  {id:'c71', name:'Sonic the Hedgehog (2006)',year:'2006',plat:'PS3/360',sec:'7thgen',coverUrl:''},
+  {id:'c72', name:'Sonic Unleashed',year:'2008',plat:'PS3/360',sec:'7thgen',coverUrl:''},
+  {id:'c73', name:'Sonic Colors',year:'2010',plat:'Wii',sec:'7thgen',coverUrl:''},
+  {id:'c74', name:'Sonic Generations',year:'2011',plat:'PS3/360',sec:'7thgen',coverUrl:''},
+  {id:'c75', name:'Sonic Lost World',year:'2013',plat:'Wii U',sec:'7thgen',coverUrl:''},
+  {id:'mod1',name:'Sonic Forces',year:'2017',plat:'Multi',sec:'modern',coverUrl:''},
+  {id:'mod2',name:'Sonic Frontiers',year:'2022',plat:'Multi',sec:'modern',coverUrl:''},
+  {id:'mod3',name:'Sonic Superstars',year:'2023',plat:'Multi',sec:'modern',coverUrl:''},
+  {id:'rem1',name:'Sonic Colors: Ultimate',year:'2021',plat:'Multi',sec:'remaster',coverUrl:''},
+  {id:'rem2',name:'Sonic Origins',year:'2022',plat:'Multi',sec:'remaster',coverUrl:''},
+  {id:'rem3',name:'Sonic Origins Plus',year:'2023',plat:'Multi',sec:'remaster',coverUrl:''},
+  {id:'hh1', name:'Sonic Chaos',year:'1993',plat:'Game Gear',sec:'gamegear',coverUrl:''},
+  {id:'hh2', name:'Sonic Triple Trouble',year:'1994',plat:'Game Gear',sec:'gamegear',coverUrl:''},
+  {id:'hh3', name:'Sonic Labyrinth',year:'1995',plat:'Game Gear',sec:'gamegear',coverUrl:''},
+  {id:'hh4', name:'Sonic Blast',year:'1996',plat:'Game Gear',sec:'gamegear',coverUrl:''},
+  {id:'gba1',name:'Sonic Advance',year:'2001',plat:'GBA',sec:'gba',coverUrl:''},
+  {id:'gba2',name:'Sonic Advance 2',year:'2002',plat:'GBA',sec:'gba',coverUrl:''},
+  {id:'gba3',name:'Sonic Advance 3',year:'2004',plat:'GBA',sec:'gba',coverUrl:''},
+  {id:'gba4',name:'Sonic Battle',year:'2003',plat:'GBA',sec:'gba',coverUrl:''},
+  {id:'ds1', name:'Sonic Rush',year:'2005',plat:'DS',sec:'ds',coverUrl:''},
+  {id:'ds2', name:'Sonic Rush Adventure',year:'2007',plat:'DS',sec:'ds',coverUrl:''},
+  {id:'ds3', name:'Sonic Lost World (3DS)',year:'2013',plat:'3DS',sec:'ds',coverUrl:''},
+  {id:'wii1',name:'Sonic and the Secret Rings',year:'2007',plat:'Wii',sec:'wii',coverUrl:''},
+  {id:'wii2',name:'Sonic and the Black Knight',year:'2009',plat:'Wii',sec:'wii',coverUrl:''},
+  {id:'sp1', name:'Sonic Riders',year:'2006',plat:'Multi',sec:'racing',coverUrl:''},
+  {id:'sp2', name:'Sonic Riders: Zero Gravity',year:'2008',plat:'Multi',sec:'racing',coverUrl:''},
+  {id:'sp3', name:'Sonic Free Riders',year:'2010',plat:'Xbox 360',sec:'racing',coverUrl:''},
+  {id:'sp4', name:'Sonic & Sega All-Stars Racing',year:'2010',plat:'Multi',sec:'racing',coverUrl:''},
+  {id:'sp5', name:'All-Stars Racing Transformed',year:'2012',plat:'Multi',sec:'racing',coverUrl:''},
+  {id:'sp6', name:'Team Sonic Racing',year:'2019',plat:'Multi',sec:'racing',coverUrl:''},
+  {id:'ind1',name:'Sonic Mania',year:'2017',plat:'Multi',sec:'mania',coverUrl:''},
+  {id:'ind2',name:'Sonic Mania Plus',year:'2018',plat:'Multi',sec:'mania',coverUrl:''},
+  {id:'mob1',name:'Sonic Dash',year:'2013',plat:'Mobile',sec:'mobile',coverUrl:''},
+  {id:'mob2',name:'Sonic Forces: Speed Battle',year:'2017',plat:'Mobile',sec:'mobile',coverUrl:''},
+  {id:'mob3',name:'Sonic Jump',year:'2012',plat:'Mobile',sec:'mobile',coverUrl:''}
 ];
-
-var SEC_LABEL = {
-  genesis:'Sega Genesis', dreamcast:'Dreamcast / GameCube', '7thgen':'7th Gen Consoles',
-  modern:'Modern', remaster:'Remasters', gamegear:'Game Gear', gba:'Game Boy Advance',
-  ds:'DS / 3DS', wii:'Wii', racing:'Racing & Spin-offs', mania:'Sonic Mania', mobile:'Mobile', other:'Other'
-};
-var SEC_ORDER = ['genesis','dreamcast','7thgen','modern','remaster','gamegear','gba','ds','wii','racing','mania','mobile','other'];
+var SL={'genesis':'Sega Genesis','dreamcast':'Dreamcast / GameCube','7thgen':'7th Gen Consoles','modern':'Modern','remaster':'Remasters','gamegear':'Game Gear','gba':'Game Boy Advance','ds':'DS / 3DS','wii':'Wii','racing':'Racing & Spin-offs','mania':'Sonic Mania','mobile':'Mobile','other':'Other'};
+var SO=['genesis','dreamcast','7thgen','modern','remaster','gamegear','gba','ds','wii','racing','mania','mobile','other'];
 
 // ── STATE ─────────────────────────────────────────────────────────────────
-var BIN_ID = '';
-var API_KEY = '';
-var state = { games: [], owned: {} };
-var pollTimer = null;
-var isSaving = false;
+var KEY='', BIN='';
+var state={games:[],owned:{}};
+var saveTimer=null, isSaving=false, pollTimer=null;
 
 function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
-// ── JSONBIN API ───────────────────────────────────────────────────────────
-function apiUrl() { return 'https://api.jsonbin.io/v3/b/' + BIN_ID; }
+// ── API ───────────────────────────────────────────────────────────────────
+var BASE = 'https://api.jsonbin.io/v3/b';
 
-function readBin(cb) {
-  fetch(apiUrl() + '/latest', {
-    headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' }
+function createBin(cb) {
+  fetch(BASE, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','X-Master-Key':KEY,'X-Bin-Name':'rita-collection','X-Bin-Private':'false'},
+    body: JSON.stringify({games:DEFS,owned:{}})
   })
-  .then(function(r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(function(data) { cb(null, data); })
-  .catch(function(e) { cb(e, null); });
+  .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+  .then(function(d){cb(null, d.metadata.id);})
+  .catch(function(e){cb(e);});
 }
 
-function writeBin(data, cb) {
-  fetch(apiUrl(), {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-    body: JSON.stringify(data)
-  })
-  .then(function(r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(function() { cb && cb(null); })
-  .catch(function(e) { cb && cb(e); });
+function readBin(cb) {
+  fetch(BASE+'/'+BIN+'/latest',{headers:{'X-Master-Key':KEY,'X-Bin-Meta':'false'}})
+  .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+  .then(function(d){cb(null,d);})
+  .catch(function(e){cb(e);});
+}
+
+function writeBin(data,cb) {
+  fetch(BASE+'/'+BIN,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':KEY},body:JSON.stringify(data)})
+  .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+  .then(function(){cb&&cb(null);})
+  .catch(function(e){cb&&cb(e);});
 }
 
 // ── SETUP ─────────────────────────────────────────────────────────────────
-function checkSetup() {
-  BIN_ID  = lsGet('rcol_binid', '');
-  API_KEY = lsGet('rcol_key', '');
-  if (BIN_ID && API_KEY) {
-    startApp();
-  } else {
-    document.getElementById('setup-screen').classList.remove('hidden');
-  }
+function init() {
+  KEY = lsGet('rck','');
+  BIN = lsGet('rcb','');
+  if (KEY && BIN) { showApp(); loadData(); }
+  else if (KEY)   { showApp(); createBin(function(err,id){ if(err){reset();return;} BIN=id; lsSet('rcb',BIN); loadData(); }); }
+  else            { document.getElementById('sscr').classList.remove('hidden'); }
 }
 
-document.getElementById('setup-btn').addEventListener('click', function() {
-  var binid = document.getElementById('inp-binid').value.trim();
-  var key   = document.getElementById('inp-key').value.trim();
-  if (!binid || !key) { showSetupErr('Заполни оба поля'); return; }
-
-  BIN_ID = binid; API_KEY = key;
-  var btn = document.getElementById('setup-btn');
-  btn.textContent = 'Проверяем...'; btn.disabled = true;
-
-  readBin(function(err, data) {
-    btn.textContent = 'Готово — подключить'; btn.disabled = false;
-    if (err) { showSetupErr('Не удалось подключиться. Проверь данные.'); return; }
-
-    lsSet('rcol_binid', BIN_ID);
-    lsSet('rcol_key', API_KEY);
-
-    // If bin is empty or missing our data structure — seed defaults
-    if (!data || !data.games) {
-      var initial = { games: DEFAULTS, owned: {} };
-      writeBin(initial, function() {
-        state = initial;
-        showApp();
-      });
-    } else {
-      state = data;
-      showApp();
-    }
+document.getElementById('sbtn').addEventListener('click', function(){
+  var k = document.getElementById('inp-key').value.trim();
+  if (!k) { showErr('Вставь Master Key'); return; }
+  if (!k.startsWith('$')) { showErr('Master Key начинается с $2b$10$... — скопируй полностью'); return; }
+  var btn=document.getElementById('sbtn');
+  btn.textContent='Создаём хранилище...'; btn.disabled=true;
+  KEY=k;
+  createBin(function(err,id){
+    btn.textContent='Подключить'; btn.disabled=false;
+    if(err){ showErr('Не удалось. Проверь Master Key и попробуй снова.'); return; }
+    BIN=id; lsSet('rck',KEY); lsSet('rcb',BIN);
+    state={games:DEFS,owned:{}};
+    showApp(); renderCol(); setBanner('ok'); startPoll();
   });
 });
 
-function showSetupErr(msg) {
-  var el = document.getElementById('setup-err');
-  el.textContent = msg; el.style.display = 'block';
-}
+function showErr(msg){var e=document.getElementById('serr');e.textContent=msg;e.style.display='block';}
 
-document.getElementById('banner-reset').addEventListener('click', function() {
-  if (!confirm('Сменить подключение? Данные в JSONBin останутся нетронутыми.')) return;
-  lsSet('rcol_binid', ''); lsSet('rcol_key', '');
-  location.reload();
+document.getElementById('breset').addEventListener('click',function(){
+  if(!confirm('Сменить ключ? Данные в JSONBin останутся.'))return;
+  lsSet('rck',''); lsSet('rcb',''); location.reload();
 });
 
-// ── START APP ─────────────────────────────────────────────────────────────
-function startApp() {
-  setBannerStatus('loading');
-  readBin(function(err, data) {
-    if (err) { setBannerStatus('error'); return; }
-    if (!data || !data.games) {
-      writeBin({ games: DEFAULTS, owned: {} }, function() {
-        state = { games: DEFAULTS, owned: {} };
-        showApp();
-      });
-    } else {
-      state = data;
-      showApp();
-    }
+function reset(){lsSet('rck','');lsSet('rcb','');location.reload();}
+
+// ── LOAD ──────────────────────────────────────────────────────────────────
+function loadData(){
+  setBanner('loading');
+  readBin(function(err,data){
+    if(err){setBanner('err');return;}
+    if(data&&data.games) state=data;
+    renderCol();
+    if(document.getElementById('p-adm').classList.contains('on')) renderAdmin(document.getElementById('asrch').value);
+    setBanner('ok');
+    startPoll();
   });
 }
 
-function showApp() {
-  document.getElementById('setup-screen').classList.add('hidden');
-  document.getElementById('app').style.display = 'block';
-  renderCol();
-  setBannerStatus('ok');
-  startPolling();
+function showApp(){
+  document.getElementById('sscr').classList.add('hidden');
+  document.getElementById('app').style.display='block';
 }
 
-// ── POLLING (check for remote changes every 8 sec) ─────────────────────────
-function startPolling() {
-  pollTimer = setInterval(function() {
-    if (isSaving) return;
-    readBin(function(err, data) {
-      if (err) { setBannerStatus('error'); return; }
-      setBannerStatus('ok');
-      if (data && data.games) {
-        state = data;
-        renderCol();
-        if (document.getElementById('p-adm').classList.contains('on')) {
-          renderAdmin(document.getElementById('asearch').value);
-        }
-      }
+// ── POLL ──────────────────────────────────────────────────────────────────
+function startPoll(){
+  if(pollTimer) clearInterval(pollTimer);
+  pollTimer=setInterval(function(){
+    if(isSaving)return;
+    readBin(function(err,data){
+      if(err){setBanner('err');return;}
+      setBanner('ok');
+      if(data&&data.games){state=data;renderCol();
+        if(document.getElementById('p-adm').classList.contains('on')) renderAdmin(document.getElementById('asrch').value);}
     });
-  }, 8000);
+  },8000);
 }
 
-// ── SAVE STATE ────────────────────────────────────────────────────────────
-var saveQueue = null;
-var saveTimer = null;
-
-function scheduleSave() {
+// ── SAVE ──────────────────────────────────────────────────────────────────
+function scheduleSave(){
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(function() {
-    isSaving = true;
-    setBannerStatus('saving');
-    writeBin(state, function(err) {
-      isSaving = false;
-      setBannerStatus(err ? 'error' : 'ok');
-    });
-  }, 600);
+  saveTimer=setTimeout(function(){
+    isSaving=true; setBanner('saving');
+    writeBin(state,function(err){isSaving=false;setBanner(err?'err':'ok');});
+  },700);
 }
 
 // ── BANNER ────────────────────────────────────────────────────────────────
-function setBannerStatus(s) {
-  var dot  = document.getElementById('banner-dot');
-  var text = document.getElementById('banner-text');
-  dot.className = 'banner-dot';
-  if (s === 'ok')     { dot.style.background = 'var(--green)'; dot.style.boxShadow = '0 0 6px var(--green)'; text.textContent = 'Синхронизировано'; }
-  if (s === 'saving') { dot.style.background = 'var(--accent)'; dot.style.boxShadow = '0 0 6px var(--accent)'; text.innerHTML = 'Сохранение<span class="saving-dot"></span>'; }
-  if (s === 'error')  { dot.style.background = 'var(--danger)'; dot.style.boxShadow = '0 0 6px var(--danger)'; text.textContent = 'Ошибка синхронизации'; }
-  if (s === 'loading'){ dot.style.background = 'var(--accent)'; dot.style.boxShadow = ''; text.textContent = 'Подключение...'; }
+function setBanner(s){
+  var d=document.getElementById('bdot'),t=document.getElementById('btxt');
+  var colors={ok:'#4CAF7D',saving:'#5B8DEF',err:'#C0544A',loading:'#5B8DEF'};
+  var texts={ok:'Синхронизировано',saving:'Сохранение…',err:'Ошибка соединения',loading:'Подключение…'};
+  d.style.background=colors[s]||colors.ok;
+  d.style.boxShadow='0 0 6px '+(colors[s]||colors.ok);
+  t.textContent=texts[s]||'';
 }
 
 // ── TOAST ─────────────────────────────────────────────────────────────────
-var _tt = null;
-function showToast(msg) {
-  var el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  clearTimeout(_tt); _tt = setTimeout(function() { el.classList.remove('show'); }, 2200);
-}
+var _tt=null;
+function showToast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){e.classList.remove('show');},2100);}
 
 // ── TABS ──────────────────────────────────────────────────────────────────
-document.querySelectorAll('.nav-tab').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.nav-tab').forEach(function(b){b.classList.remove('on');});
-    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
-    btn.classList.add('on');
-    document.getElementById('p-' + btn.dataset.t).classList.add('on');
-    if (btn.dataset.t === 'adm') renderAdmin('');
+document.querySelectorAll('.ntab').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.ntab').forEach(function(x){x.classList.remove('on');});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    document.getElementById('p-'+b.dataset.t).classList.add('on');
+    if(b.dataset.t==='adm') renderAdmin('');
   });
 });
 
-// ── RENDER COLLECTION ─────────────────────────────────────────────────────
-function renderCol() {
-  var root = document.getElementById('groot');
-  root.innerHTML = '';
-  var grouped = {};
-  state.games.forEach(function(g) {
-    var s = g.sec || 'other';
-    if (!grouped[s]) grouped[s] = [];
-    grouped[s].push(g);
-  });
-  var first = true;
-  SEC_ORDER.forEach(function(sec) {
-    if (!grouped[sec] || !grouped[sec].length) return;
-    var sg = grouped[sec];
-    var oc = sg.filter(function(g){return state.owned[g.id];}).length;
-    var h = document.createElement('div'); h.className = 'sec-head';
-    if (!first) h.style.marginTop = '36px'; first = false;
-    var nm = document.createElement('div'); nm.className = 'sec-name'; nm.textContent = SEC_LABEL[sec]||sec;
-    var ln = document.createElement('div'); ln.className = 'sec-line';
-    var ct = document.createElement('div'); ct.className = 'sec-count'; ct.textContent = oc+' / '+sg.length;
-    h.appendChild(nm); h.appendChild(ln); h.appendChild(ct);
-    root.appendChild(h);
-    var grid = document.createElement('div'); grid.className = 'game-grid';
-    sg.forEach(function(g){grid.appendChild(makeCard(g));});
+// ── RENDER ────────────────────────────────────────────────────────────────
+function renderCol(){
+  var root=document.getElementById('groot'); root.innerHTML='';
+  var grp={};
+  state.games.forEach(function(g){var s=g.sec||'other';if(!grp[s])grp[s]=[];grp[s].push(g);});
+  var first=true;
+  SO.forEach(function(sec){
+    if(!grp[sec]||!grp[sec].length)return;
+    var sg=grp[sec],oc=sg.filter(function(g){return state.owned[g.id];}).length;
+    var h=document.createElement('div');h.className='seh';if(!first)h.style.marginTop='34px';first=false;
+    var nm=document.createElement('div');nm.className='sename';nm.textContent=SL[sec]||sec;
+    var ln=document.createElement('div');ln.className='seline';
+    var ct=document.createElement('div');ct.className='secnt';ct.textContent=oc+' / '+sg.length;
+    h.appendChild(nm);h.appendChild(ln);h.appendChild(ct);root.appendChild(h);
+    var grid=document.createElement('div');grid.className='ggrid';
+    sg.forEach(function(g){grid.appendChild(mkCard(g));});
     root.appendChild(grid);
   });
-  updateStats();
+  updStats();
 }
 
-function makeCard(game) {
-  var isOwned = !!state.owned[game.id];
-  var card = document.createElement('div');
-  card.className = 'gcard'+(isOwned?' owned':'');
-  card.id = 'gc-'+game.id;
-
-  var cov = document.createElement('div'); cov.className = 'gcover';
-  var badge = document.createElement('div'); badge.className = 'owned-badge'; badge.textContent = '✓';
-  if (game.coverUrl && game.coverUrl.trim()) {
-    var img = document.createElement('img');
-    img.src = game.coverUrl; img.alt = game.name;
-    img.onerror = function(){if(img.parentNode===cov){cov.removeChild(img);cov.insertBefore(makePh(game),badge);}};
-    cov.appendChild(img);
-  } else { cov.appendChild(makePh(game)); }
+function mkCard(g){
+  var isO=!!state.owned[g.id];
+  var c=document.createElement('div');c.className='gcard'+(isO?' owned':'');c.id='gc-'+g.id;
+  var cov=document.createElement('div');cov.className='gcov';
+  var badge=document.createElement('div');badge.className='obadge';badge.textContent='✓';
+  if(g.coverUrl&&g.coverUrl.trim()){var img=document.createElement('img');img.src=g.coverUrl;img.alt=g.name;img.onerror=function(){if(img.parentNode===cov){cov.removeChild(img);cov.insertBefore(mkPh(g),badge);}};cov.appendChild(img);}
+  else{cov.appendChild(mkPh(g));}
   cov.appendChild(badge);
-
-  var inf = document.createElement('div'); inf.className = 'ginfo';
-  var nm = document.createElement('div'); nm.className = 'gname'; nm.textContent = game.name;
-  var meta = document.createElement('div'); meta.className = 'gmeta';
-  var yr = document.createElement('span'); yr.className = 'gyear'; yr.textContent = game.year;
-  var pl = document.createElement('span'); pl.className = 'gplat'; pl.textContent = game.plat;
-  meta.appendChild(yr); meta.appendChild(pl); inf.appendChild(nm); inf.appendChild(meta);
-  card.appendChild(cov); card.appendChild(inf);
-  card.addEventListener('click', function(){toggleOwned(game.id);});
-  return card;
+  var inf=document.createElement('div');inf.className='ginf';
+  var nm=document.createElement('div');nm.className='gname';nm.textContent=g.name;
+  var mt=document.createElement('div');mt.className='gmeta';
+  var yr=document.createElement('span');yr.className='gyear';yr.textContent=g.year;
+  var pl=document.createElement('span');pl.className='gplat';pl.textContent=g.plat;
+  mt.appendChild(yr);mt.appendChild(pl);inf.appendChild(nm);inf.appendChild(mt);
+  c.appendChild(cov);c.appendChild(inf);
+  c.addEventListener('click',function(){togOwned(g.id);});
+  return c;
 }
 
-function makePh(game) {
-  var d = document.createElement('div'); d.className = 'gph';
-  var i = document.createElement('div'); i.className = 'gph-icon'; i.textContent = '◈';
-  var n = document.createElement('div'); n.className = 'gph-name'; n.textContent = game.name;
-  d.appendChild(i); d.appendChild(n); return d;
+function mkPh(g){
+  var d=document.createElement('div');d.className='gph';
+  var i=document.createElement('div');i.className='gphi';i.textContent='◈';
+  var n=document.createElement('div');n.className='gphn';n.textContent=g.name;
+  d.appendChild(i);d.appendChild(n);return d;
 }
 
-function toggleOwned(id) {
-  if (state.owned[id]) delete state.owned[id]; else state.owned[id] = true;
-  var isOn = !!state.owned[id];
-  var card = document.getElementById('gc-'+id);
-  if (card) card.classList.toggle('owned', isOn);
-  var tog = document.getElementById('at-'+id);
-  if (tog) tog.checked = isOn;
-  updateStats();
-  scheduleSave();
+function togOwned(id){
+  if(state.owned[id])delete state.owned[id];else state.owned[id]=true;
+  var isO=!!state.owned[id];
+  var c=document.getElementById('gc-'+id);if(c)c.classList.toggle('owned',isO);
+  var t=document.getElementById('at-'+id);if(t)t.checked=isO;
+  updStats();scheduleSave();
 }
 
-function updateStats() {
-  var total = state.games.length, count = Object.keys(state.owned).length;
-  document.getElementById('h-owned').textContent = count;
-  document.getElementById('h-total').textContent = total;
-  document.getElementById('h-bar').style.width = (total?(count/total*100).toFixed(1):0)+'%';
+function updStats(){
+  var tot=state.games.length,cnt=Object.keys(state.owned).length;
+  document.getElementById('ho').textContent=cnt;
+  document.getElementById('ht').textContent=tot;
+  document.getElementById('hbar').style.width=(tot?(cnt/tot*100).toFixed(1):0)+'%';
 }
 
 // ── ADMIN ─────────────────────────────────────────────────────────────────
-function renderAdmin(filter) {
-  var list = document.getElementById('alist'); list.innerHTML = '';
-  var q = filter.toLowerCase();
-  var shown = state.games.filter(function(g){return !q||g.name.toLowerCase().indexOf(q)!==-1;});
-  if (!shown.length) { var e=document.createElement('div');e.className='empty-state';e.textContent='Ничего не найдено';list.appendChild(e);return; }
-  shown.forEach(function(game) {
-    var row = document.createElement('div'); row.className = 'adm-row';
-    var thumb = document.createElement('div'); thumb.className = 'adm-thumb';
-    if (game.coverUrl&&game.coverUrl.trim()) { var ti=document.createElement('img');ti.src=game.coverUrl;ti.onerror=function(){ti.style.display='none';thumb.textContent='◈';};thumb.appendChild(ti); }
-    else { thumb.textContent='◈'; }
-    var inf = document.createElement('div'); inf.className='adm-inf';
-    var anm=document.createElement('div');anm.className='adm-name';anm.textContent=game.name;
-    var sub=document.createElement('div');sub.className='adm-sub';sub.textContent=game.year+' · '+game.plat;
-    inf.appendChild(anm);inf.appendChild(sub);
-    var acts=document.createElement('div');acts.className='adm-acts';
-    var urlBtn=document.createElement('button');urlBtn.className='btn-url'+(game.coverUrl?' has':'');urlBtn.textContent=game.coverUrl?'🖼 URL':'+ URL';
-    urlBtn.addEventListener('click',function(){openModal(game);});
+function renderAdmin(filter){
+  var list=document.getElementById('alist');list.innerHTML='';
+  var q=filter.toLowerCase();
+  var shown=state.games.filter(function(g){return !q||g.name.toLowerCase().indexOf(q)!==-1;});
+  if(!shown.length){var e=document.createElement('div');e.className='empty';e.textContent='Ничего не найдено';list.appendChild(e);return;}
+  shown.forEach(function(g){
+    var row=document.createElement('div');row.className='arow';
+    var th=document.createElement('div');th.className='athumb';
+    if(g.coverUrl&&g.coverUrl.trim()){var ti=document.createElement('img');ti.src=g.coverUrl;ti.onerror=function(){ti.style.display='none';th.textContent='◈';};th.appendChild(ti);}
+    else th.textContent='◈';
+    var inf=document.createElement('div');inf.className='ainf';
+    var an=document.createElement('div');an.className='aname';an.textContent=g.name;
+    var as=document.createElement('div');as.className='asub';as.textContent=g.year+' · '+g.plat;
+    inf.appendChild(an);inf.appendChild(as);
+    var acts=document.createElement('div');acts.className='aacts';
+    var ub=document.createElement('button');ub.className='burlt'+(g.coverUrl?' has':'');ub.textContent=g.coverUrl?'🖼 URL':'+ URL';
+    ub.addEventListener('click',function(){openModal(g);});
     var tl=document.createElement('label');tl.className='tog';
-    var ti2=document.createElement('input');ti2.type='checkbox';ti2.id='at-'+game.id;ti2.checked=!!state.owned[game.id];
-    ti2.addEventListener('change',function(){toggleOwned(game.id);});
-    var tb=document.createElement('div');tb.className='tog-track';
-    var tlb=document.createElement('span');tlb.className='tog-lbl';tlb.textContent='есть';
+    var ti2=document.createElement('input');ti2.type='checkbox';ti2.id='at-'+g.id;ti2.checked=!!state.owned[g.id];
+    ti2.addEventListener('change',function(){togOwned(g.id);});
+    var tb=document.createElement('div');tb.className='togtr';
+    var tlb=document.createElement('span');tlb.className='togl';tlb.textContent='есть';
     tl.appendChild(ti2);tl.appendChild(tb);tl.appendChild(tlb);
-    var del=document.createElement('button');del.className='btn-del';del.textContent='✕';
+    var del=document.createElement('button');del.className='bdel';del.textContent='✕';
     del.addEventListener('click',function(){
-      if (!confirm('Удалить «'+game.name+'»?')) return;
-      state.games=state.games.filter(function(g){return g.id!==game.id;});
-      delete state.owned[game.id];
-      renderCol();renderAdmin(document.getElementById('asearch').value);
-      scheduleSave();showToast('Удалено: '+game.name);
+      if(!confirm('Удалить «'+g.name+'»?'))return;
+      state.games=state.games.filter(function(x){return x.id!==g.id;});
+      delete state.owned[g.id];
+      renderCol();renderAdmin(document.getElementById('asrch').value);
+      scheduleSave();showToast('Удалено: '+g.name);
     });
-    acts.appendChild(urlBtn);acts.appendChild(tl);acts.appendChild(del);
-    row.appendChild(thumb);row.appendChild(inf);row.appendChild(acts);
-    list.appendChild(row);
+    acts.appendChild(ub);acts.appendChild(tl);acts.appendChild(del);
+    row.appendChild(th);row.appendChild(inf);row.appendChild(acts);list.appendChild(row);
   });
 }
-
-document.getElementById('asearch').addEventListener('input',function(){renderAdmin(this.value);});
+document.getElementById('asrch').addEventListener('input',function(){renderAdmin(this.value);});
 
 // ── MODAL ─────────────────────────────────────────────────────────────────
-var modalId = null;
-function openModal(game) {
-  modalId = game.id;
-  document.getElementById('modal-gname').textContent = game.name;
-  document.getElementById('modal-url').value = game.coverUrl || '';
-  updatePreview(game.coverUrl || '');
-  document.getElementById('modal').classList.remove('hidden');
-}
-function closeModal() { document.getElementById('modal').classList.add('hidden'); modalId=null; }
-function updatePreview(url) {
-  var img=document.getElementById('modal-img'),np=document.getElementById('modal-noprev');
-  if(url&&url.trim()){img.src=url;img.style.display='block';np.style.display='none';}
-  else{img.src='';img.style.display='none';np.style.display='block';}
-}
-document.getElementById('modal-url').addEventListener('input',function(){updatePreview(this.value);});
-document.getElementById('modal-cancel').addEventListener('click',closeModal);
+var mid=null;
+function openModal(g){mid=g.id;document.getElementById('mgame').textContent=g.name;document.getElementById('murl').value=g.coverUrl||'';updPrev(g.coverUrl||'');document.getElementById('modal').classList.remove('hidden');}
+function closeModal(){document.getElementById('modal').classList.add('hidden');mid=null;}
+function updPrev(u){var img=document.getElementById('mimg'),np=document.getElementById('mnp');if(u&&u.trim()){img.src=u;img.style.display='block';np.style.display='none';}else{img.src='';img.style.display='none';np.style.display='block';}}
+document.getElementById('murl').addEventListener('input',function(){updPrev(this.value);});
+document.getElementById('mcan').addEventListener('click',closeModal);
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
-document.getElementById('modal-clear').addEventListener('click',function(){
-  if(!modalId)return;
-  var g=state.games.find(function(x){return x.id===modalId;});
-  if(g){g.coverUrl='';renderCol();renderAdmin(document.getElementById('asearch').value);scheduleSave();showToast('Обложка удалена');}
-  closeModal();
+document.getElementById('mclr').addEventListener('click',function(){
+  if(!mid)return;var g=state.games.find(function(x){return x.id===mid;});
+  if(g){g.coverUrl='';renderCol();renderAdmin(document.getElementById('asrch').value);scheduleSave();showToast('Обложка удалена');}closeModal();
 });
-document.getElementById('modal-save').addEventListener('click',function(){
-  if(!modalId)return;
-  var url=document.getElementById('modal-url').value.trim();
-  var g=state.games.find(function(x){return x.id===modalId;});
-  if(g){g.coverUrl=url;renderCol();renderAdmin(document.getElementById('asearch').value);scheduleSave();showToast('Обложка сохранена');}
-  closeModal();
+document.getElementById('msave').addEventListener('click',function(){
+  if(!mid)return;var u=document.getElementById('murl').value.trim();
+  var g=state.games.find(function(x){return x.id===mid;});
+  if(g){g.coverUrl=u;renderCol();renderAdmin(document.getElementById('asrch').value);scheduleSave();showToast('Обложка сохранена');}closeModal();
 });
 
-// ── ADD GAME ──────────────────────────────────────────────────────────────
+// ── ADD ───────────────────────────────────────────────────────────────────
 document.getElementById('badd').addEventListener('click',function(){
   var name=document.getElementById('fn').value.trim();
   if(!name){showToast('Введи название!');return;}
-  var g={id:'u'+Date.now(),name:name,year:document.getElementById('fy').value.trim()||'—',plat:document.getElementById('fp').value.trim()||'—',sec:document.getElementById('fs').value,coverUrl:document.getElementById('furl').value.trim()};
+  var g={id:'u'+Date.now(),name:name,year:document.getElementById('fy').value.trim()||'—',plat:document.getElementById('fp').value.trim()||'—',sec:document.getElementById('fsc').value,coverUrl:document.getElementById('furl').value.trim()};
   state.games.push(g);
   document.getElementById('fn').value='';document.getElementById('fy').value='';document.getElementById('fp').value='';document.getElementById('furl').value='';
-  renderCol();renderAdmin(document.getElementById('asearch').value);scheduleSave();showToast('Добавлено: '+g.name);
+  renderCol();renderAdmin(document.getElementById('asrch').value);scheduleSave();showToast('Добавлено: '+g.name);
 });
 
 // ── RESETS ────────────────────────────────────────────────────────────────
-document.getElementById('bro').addEventListener('click',function(){
-  if(!confirm('Сбросить все галочки?'))return;
-  state.owned={};renderCol();renderAdmin(document.getElementById('asearch').value);scheduleSave();showToast('Галочки сброшены');
-});
-document.getElementById('bra').addEventListener('click',function(){
-  if(!confirm('Сбросить ВСЁ?'))return;
-  state={games:JSON.parse(JSON.stringify(DEFAULTS)),owned:{}};renderCol();renderAdmin('');scheduleSave();showToast('Всё сброшено');
-});
+document.getElementById('bro').addEventListener('click',function(){if(!confirm('Сбросить галочки?'))return;state.owned={};renderCol();renderAdmin(document.getElementById('asrch').value);scheduleSave();showToast('Галочки сброшены');});
+document.getElementById('bra').addEventListener('click',function(){if(!confirm('Сбросить всё?'))return;state={games:JSON.parse(JSON.stringify(DEFS)),owned:{}};renderCol();renderAdmin('');scheduleSave();showToast('Всё сброшено');});
 
-// ── INIT ──────────────────────────────────────────────────────────────────
-checkSetup();
+// ── START ─────────────────────────────────────────────────────────────────
+init();
 </script>
 </body>
 </html>
