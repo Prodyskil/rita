@@ -287,9 +287,9 @@ var SECTIONS = [
 //  СОСТОЯНИЕ — галочки хранятся в localStorage
 // ============================================================
 var owned = {};
-try { owned = JSON.parse(localStorage.getItem('rita_owned') || '{}'); } catch(e) {}
+try { var _o = JSON.parse(localStorage.getItem('rita_owned') || '{}'); owned = (Array.isArray(_o) || typeof _o !== 'object') ? {} : _o; } catch(e) {}
 
-function saveOwned() {
+  function saveOwned() {
   try { localStorage.setItem('rita_owned', JSON.stringify(owned)); } catch(e) {}
 }
 
