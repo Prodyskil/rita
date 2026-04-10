@@ -5,33 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rita's Collection</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- ████████████████████████████████████████████████████████
+     ИНСТРУКЦИЯ ПО НАСТРОЙКЕ:
+
+     1. Перейди на https://console.firebase.google.com
+     2. Создай новый проект (название любое)
+     3. В проекте: Build → Realtime Database → Create Database
+        Выбери регион Europe-west1, начни в Test mode (можно потом ограничить)
+     4. В Project Settings (шестерёнка) → General → Your apps → Web (</>)
+        Зарегистрируй приложение, скопируй firebaseConfig
+     5. Вставь значения ниже вместо REPLACE_WITH_YOUR_...
+
+     После этого загрузи HTML на любой хостинг (GitHub Pages, Netlify,
+     Vercel — все бесплатные) или просто отправь файл девушке.
+     Данные будут общими у всех кто откроет страницу.
+     ████████████████████████████████████████████████████████ -->
+
+<script>
+  var FIREBASE_CONFIG = {
+    apiKey:            "REPLACE_WITH_YOUR_API_KEY",
+    authDomain:        "REPLACE_WITH_YOUR_AUTH_DOMAIN",
+    databaseURL:       "REPLACE_WITH_YOUR_DATABASE_URL",
+    projectId:         "REPLACE_WITH_YOUR_PROJECT_ID",
+    storageBucket:     "REPLACE_WITH_YOUR_STORAGE_BUCKET",
+    messagingSenderId: "REPLACE_WITH_YOUR_MESSAGING_SENDER_ID",
+    appId:             "REPLACE_WITH_YOUR_APP_ID"
+  };
+</script>
+
 <style>
 :root {
   --bg:      #0C0C10;
   --surface: #13131A;
   --panel:   #18181F;
   --border:  rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
+  --border2: rgba(255,255,255,0.13);
   --text:    #D8D4CC;
   --dim:     #6B6B7A;
   --accent:  #5B8DEF;
-  --accent2: #E2A96B;
-  --owned:   #5B8DEF;
+  --green:   #4CAF7D;
   --danger:  #C0544A;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; }
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  font-size: 14px;
+/* ── SETUP BANNER ── */
+.setup-banner {
+  background: rgba(226, 169, 107, 0.1);
+  border-bottom: 1px solid rgba(226,169,107,.25);
+  padding: 12px 40px;
+  font-size: .8rem;
+  color: #E2A96B;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+.setup-banner a { color: inherit; text-decoration: underline; }
+.setup-banner.hidden { display: none; }
 
+/* ── HEADER ── */
 .site-header {
-  padding: 40px 40px 0;
+  padding: 36px 40px 0;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -39,7 +74,6 @@ body {
   justify-content: space-between;
   gap: 20px;
 }
-
 .site-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(1.6rem, 4vw, 2.6rem);
@@ -48,426 +82,303 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
 }
-
 .site-title span { color: var(--accent); }
-
 .site-sub {
   font-family: 'Syne', sans-serif;
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-top: 6px;
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dim); margin-top: 6px;
 }
-
 .header-stat { text-align: right; flex-shrink: 0; }
 .header-stat .big {
   font-family: 'Syne', sans-serif;
-  font-size: 2rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
+  font-size: 2rem; font-weight: 800;
+  color: #fff; line-height: 1;
 }
-.header-stat .lbl {
-  font-size: .68rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-top: 3px;
-}
-.progress-line {
-  width: 140px;
-  height: 2px;
-  background: var(--border2);
-  border-radius: 2px;
-  margin-top: 8px;
-  margin-left: auto;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width .6s ease;
-}
+.header-stat .lbl { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--dim); margin-top: 3px; }
+.prog-line { width: 140px; height: 2px; background: var(--border2); border-radius: 2px; margin-top: 8px; margin-left: auto; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width .6s ease; }
 
+/* ── NAV ── */
 .site-nav {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   padding: 28px 40px 0;
-  display: flex;
-  align-items: center;
-  gap: 0;
+  display: flex; gap: 0;
   border-bottom: 1px solid var(--border);
 }
-
 .nav-tab {
   font-family: 'Syne', sans-serif;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--dim);
-  background: none;
-  border: none;
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--dim); background: none; border: none;
   border-bottom: 2px solid transparent;
-  padding: 12px 20px 12px 0;
-  margin-bottom: -1px;
-  cursor: pointer;
-  transition: color .2s, border-color .2s;
+  padding: 12px 20px 12px 0; margin-bottom: -1px;
+  cursor: pointer; transition: color .2s, border-color .2s;
 }
 .nav-tab:hover { color: var(--text); }
 .nav-tab.on { color: #fff; border-bottom-color: var(--accent); }
 
-.main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 40px 60px;
-}
+/* ── MAIN ── */
+.main { max-width: 1200px; margin: 0 auto; padding: 32px 40px 60px; }
 
 @media (max-width: 640px) {
-  .site-header { padding: 28px 20px 0; flex-direction: column; align-items: flex-start; }
+  .setup-banner { padding: 10px 20px; }
+  .site-header { padding: 24px 20px 0; flex-direction: column; align-items: flex-start; }
   .header-stat { text-align: left; }
-  .progress-line { margin-left: 0; }
-  .site-nav { padding: 20px 20px 0; }
-  .main { padding: 24px 20px 60px; }
+  .prog-line { margin-left: 0; }
+  .site-nav { padding: 18px 20px 0; }
+  .main { padding: 24px 20px 50px; }
 }
 
 .panel { display: none; }
 .panel.on { display: block; animation: appear .2s ease; }
 @keyframes appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
+/* ── LOADING ── */
+.loading-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 14px; min-height: 320px;
+  color: var(--dim); font-size: .88rem; letter-spacing: .05em;
+}
+.spinner {
+  width: 28px; height: 28px;
+  border: 2px solid var(--border2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── SECTION ── */
 .sec-head {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
+  display: flex; align-items: baseline; gap: 12px;
   margin: 36px 0 16px;
 }
 .sec-head:first-child { margin-top: 0; }
 .sec-name {
   font-family: 'Syne', sans-serif;
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--dim);
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--dim); white-space: nowrap;
 }
 .sec-line { flex: 1; height: 1px; background: var(--border); }
 .sec-count {
   font-family: 'Syne', sans-serif;
-  font-size: .62rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  color: var(--dim);
-  opacity: .6;
+  font-size: .6rem; font-weight: 600;
+  color: var(--dim); opacity: .6; white-space: nowrap;
 }
 
+/* ── GAME GRID ── */
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+  gap: 10px;
 }
 
+/* CARD */
 .gcard {
   border-radius: 8px;
   background: var(--surface);
   border: 1px solid var(--border);
   overflow: hidden;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   transition: border-color .2s, transform .2s, box-shadow .2s;
   position: relative;
 }
-.gcard:hover {
+
+/* Unowned = desaturated */
+.gcard:not(.owned) .gcover { filter: grayscale(1) brightness(.7); }
+.gcard:not(.owned) .gname { color: var(--dim); }
+.gcard:not(.owned) { border-color: var(--border); opacity: .75; }
+.gcard:not(.owned):hover {
+  opacity: 1;
   border-color: var(--border2);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0,0,0,.4);
 }
-.gcard.owned { border-color: rgba(91,141,239,.3); }
-.gcard.owned:hover { border-color: rgba(91,141,239,.6); }
+.gcard:not(.owned):hover .gcover { filter: grayscale(.5) brightness(.85); }
+
+/* Owned = color + green border */
+.gcard.owned {
+  border-color: rgba(76, 175, 125, 0.45);
+  box-shadow: 0 0 0 1px rgba(76,175,125,.15), 0 8px 24px rgba(0,0,0,.35);
+  opacity: 1;
+}
+.gcard.owned:hover {
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(76,175,125,.3), 0 12px 32px rgba(0,0,0,.4);
+}
+.gcard.owned .gcover { filter: none; }
+.gcard.owned .gname { color: #fff; }
 
 .gcover {
-  width: 100%;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: var(--panel);
-  position: relative;
-  flex-shrink: 0;
+  width: 100%; aspect-ratio: 3/4;
+  overflow: hidden; background: var(--panel);
+  position: relative; flex-shrink: 0;
+  transition: filter .3s;
 }
 .gcover img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  transition: transform .35s ease;
+  transition: transform .35s;
 }
 .gcard:hover .gcover img { transform: scale(1.05); }
 
 .gph {
   width: 100%; height: 100%;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 8px;
+  align-items: center; justify-content: center; gap: 8px;
   background: var(--panel);
 }
-.gph-icon { font-size: 1.6rem; opacity: .3; }
+.gph-icon { font-size: 1.5rem; opacity: .25; }
 .gph-name {
   font-family: 'Syne', sans-serif;
-  font-size: .48rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--dim);
-  text-align: center;
-  padding: 0 8px;
-  line-height: 1.5;
-  opacity: .7;
+  font-size: .46rem; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase;
+  color: var(--dim); text-align: center;
+  padding: 0 8px; line-height: 1.5; opacity: .6;
 }
 
-.owned-dot {
-  position: absolute;
-  top: 8px; right: 8px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
-  display: none;
+/* Owned checkmark badge */
+.owned-badge {
+  position: absolute; top: 7px; right: 7px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green);
+  display: none; align-items: center; justify-content: center;
+  font-size: .65rem; font-weight: 700; color: #fff;
+  box-shadow: 0 2px 8px rgba(76,175,125,.4);
 }
-.gcard.owned .owned-dot { display: block; }
+.gcard.owned .owned-badge { display: flex; }
 
-.gcard.owned .gcover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(91,141,239,.06);
-  pointer-events: none;
-}
-
-.ginfo {
-  padding: 10px 10px 11px;
-  display: flex; flex-direction: column; gap: 4px;
-  border-top: 1px solid var(--border);
-}
-.gname {
-  font-family: 'Syne', sans-serif;
-  font-size: .72rem;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.3;
-}
-.gcard.owned .gname { color: #fff; }
-.gmeta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
-}
-.gyear { font-size: .62rem; color: var(--dim); font-weight: 300; }
+.ginfo { padding: 9px 10px 10px; display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--border); }
+.gname { font-family: 'Syne', sans-serif; font-size: .7rem; font-weight: 700; color: var(--dim); line-height: 1.3; transition: color .2s; }
+.gmeta { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.gyear { font-size: .6rem; color: var(--dim); font-weight: 300; opacity: .7; }
 .gplat {
-  font-size: .55rem;
-  color: var(--dim);
-  background: rgba(255,255,255,.05);
+  font-size: .52rem; color: var(--dim);
+  background: rgba(255,255,255,.04);
   border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 1px 5px;
+  border-radius: 3px; padding: 1px 5px;
+  font-family: 'Syne', sans-serif; font-weight: 600;
+}
+
+/* ── ADMIN ── */
+.adm-grid { display: flex; flex-direction: column; gap: 22px; }
+.adm-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; }
+.adm-title {
   font-family: 'Syne', sans-serif;
-  font-weight: 600;
-  letter-spacing: .04em;
+  font-size: .66rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 18px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--border);
 }
-
-.adm-grid { display: flex; flex-direction: column; gap: 24px; }
-
-.adm-block {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 22px 24px;
-}
-
-.adm-block-title {
-  font-family: 'Syne', sans-serif;
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-bottom: 18px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-}
-
 .adm-search {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  color: var(--text);
-  font-family: 'Outfit', sans-serif;
-  font-size: .88rem;
-  padding: 9px 14px;
-  outline: none;
-  margin-bottom: 14px;
-  transition: border-color .2s;
+  width: 100%; background: var(--bg);
+  border: 1px solid var(--border2); border-radius: 6px;
+  color: var(--text); font-family: 'Outfit', sans-serif;
+  font-size: .88rem; padding: 9px 14px; outline: none;
+  margin-bottom: 14px; transition: border-color .2s;
 }
 .adm-search:focus { border-color: var(--accent); }
-.adm-search::placeholder { color: var(--dim); opacity: .6; }
-
-.adm-list {
-  display: flex; flex-direction: column; gap: 6px;
-  max-height: 420px; overflow-y: auto; padding-right: 4px;
-}
+.adm-search::placeholder { color: var(--dim); opacity: .5; }
+.adm-list { display: flex; flex-direction: column; gap: 6px; max-height: 420px; overflow-y: auto; padding-right: 4px; }
 .adm-list::-webkit-scrollbar { width: 3px; }
-.adm-list::-webkit-scrollbar-track { background: transparent; }
 .adm-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
-.adm-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 9px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  transition: border-color .15s;
-}
+.adm-row { display: flex; align-items: center; gap: 11px; padding: 9px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--panel); transition: border-color .15s; }
 .adm-row:hover { border-color: var(--border2); }
 
 .adm-thumb {
-  width: 32px; height: 43px;
-  border-radius: 4px;
-  background: var(--bg);
-  flex-shrink: 0;
-  overflow: hidden;
-  border: 1px solid var(--border2);
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 43px; border-radius: 4px; background: var(--bg);
+  flex-shrink: 0; overflow: hidden; border: 1px solid var(--border2);
+  position: relative; display: flex; align-items: center; justify-content: center;
   font-size: .9rem; color: var(--dim);
 }
 .adm-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 .adm-inf { flex: 1; min-width: 0; }
-.adm-name {
-  font-family: 'Syne', sans-serif;
-  font-size: .78rem; font-weight: 700;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  color: var(--text);
-}
-.adm-sub { font-size: .63rem; color: var(--dim); margin-top: 2px; font-weight: 300; }
+.adm-name { font-family: 'Syne', sans-serif; font-size: .78rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.adm-sub { font-size: .62rem; color: var(--dim); margin-top: 2px; font-weight: 300; }
 
 .adm-acts { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
+/* Toggle */
 .tog { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
 .tog input { display: none; }
-.tog-track {
-  width: 30px; height: 16px;
-  border-radius: 999px;
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  position: relative; flex-shrink: 0;
-  transition: background .2s, border-color .2s;
-}
-.tog-track::after {
-  content: ''; position: absolute;
-  top: 2px; left: 2px;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--dim);
-  transition: all .2s;
-}
-.tog input:checked ~ .tog-track { background: rgba(91,141,239,.15); border-color: var(--accent); }
-.tog input:checked ~ .tog-track::after { transform: translateX(14px); background: var(--accent); }
-.tog-lbl { font-size: .65rem; color: var(--dim); font-weight: 500; font-family: 'Syne', sans-serif; letter-spacing: .05em; }
+.tog-track { width: 30px; height: 16px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border2); position: relative; flex-shrink: 0; transition: background .2s, border-color .2s; }
+.tog-track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: var(--dim); transition: all .2s; }
+.tog input:checked ~ .tog-track { background: rgba(76,175,125,.15); border-color: var(--green); }
+.tog input:checked ~ .tog-track::after { transform: translateX(14px); background: var(--green); }
+.tog-lbl { font-size: .63rem; color: var(--dim); font-family: 'Syne', sans-serif; font-weight: 600; letter-spacing: .05em; }
 
-.btn-del {
-  background: none;
-  border: 1px solid rgba(192,84,74,.25);
-  color: rgba(192,84,74,.7);
-  border-radius: 4px;
-  width: 24px; height: 24px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .75rem; cursor: pointer;
-  transition: all .15s;
+.btn-url {
+  background: none; border: 1px solid var(--border2);
+  color: var(--dim); border-radius: 4px;
+  padding: 3px 8px; font-size: .62rem; cursor: pointer;
+  font-family: 'Syne', sans-serif; font-weight: 600;
+  letter-spacing: .04em; transition: all .15s; white-space: nowrap;
 }
-.btn-del:hover { border-color: var(--danger); color: var(--danger); background: rgba(192,84,74,.08); }
+.btn-url:hover { border-color: var(--accent); color: var(--accent); }
+.btn-url.has-cover { border-color: rgba(76,175,125,.4); color: var(--green); }
+.btn-url.has-cover:hover { border-color: var(--green); }
 
-.add-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
+.btn-del { background: none; border: 1px solid rgba(192,84,74,.2); color: rgba(192,84,74,.6); border-radius: 4px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: .72rem; cursor: pointer; transition: all .15s; flex-shrink: 0; }
+.btn-del:hover { border-color: var(--danger); color: var(--danger); background: rgba(192,84,74,.07); }
+
+/* ADD FORM */
+.add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 520px) { .add-grid { grid-template-columns: 1fr; } }
-
 .field { display: flex; flex-direction: column; gap: 5px; }
-.field label {
-  font-family: 'Syne', sans-serif;
-  font-size: .6rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--dim);
-}
-.field input, .field select {
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  color: var(--text);
-  font-family: 'Outfit', sans-serif;
-  font-size: .88rem;
-  padding: 9px 12px;
-  outline: none;
-  transition: border-color .2s;
-}
+.field label { font-family: 'Syne', sans-serif; font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.field input, .field select { background: var(--bg); border: 1px solid var(--border2); border-radius: 6px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: .88rem; padding: 9px 12px; outline: none; transition: border-color .2s; }
 .field input:focus, .field select:focus { border-color: var(--accent); }
 .field input::placeholder { color: var(--dim); opacity: .5; }
 .field select option { background: #1a1a22; }
+.field.span2 { grid-column: 1 / -1; }
 
-.btn-add {
-  margin-top: 14px;
-  font-family: 'Syne', sans-serif;
-  font-size: .68rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  padding: 10px 22px;
-  background: var(--accent);
-  color: #fff;
-  border: none; border-radius: 6px;
-  cursor: pointer;
-  transition: opacity .2s, transform .15s;
-}
+.btn-add { margin-top: 14px; font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 10px 22px; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: opacity .2s, transform .15s; }
 .btn-add:hover { opacity: .85; transform: translateY(-1px); }
-.btn-add:active { transform: none; }
 
+/* DANGER */
 .danger-row { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-dng {
-  font-family: 'Syne', sans-serif;
-  font-size: .63rem; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase;
-  padding: 8px 16px;
-  background: transparent;
-  color: rgba(192,84,74,.7);
-  border: 1px solid rgba(192,84,74,.25);
-  border-radius: 6px; cursor: pointer;
-  transition: all .2s;
-}
+.btn-dng { font-family: 'Syne', sans-serif; font-size: .63rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 8px 16px; background: transparent; color: rgba(192,84,74,.7); border: 1px solid rgba(192,84,74,.22); border-radius: 6px; cursor: pointer; transition: all .2s; }
 .btn-dng:hover { color: var(--danger); border-color: var(--danger); background: rgba(192,84,74,.06); }
 
-.toast {
-  position: fixed; bottom: 24px; right: 24px; z-index: 999;
-  background: var(--panel);
-  border: 1px solid var(--border2);
-  border-radius: 8px;
-  padding: 11px 18px;
-  font-size: .82rem; color: var(--text); font-weight: 500;
-  box-shadow: 0 8px 32px rgba(0,0,0,.5);
-  pointer-events: none;
-  opacity: 0; transform: translateY(6px); transition: all .25s;
-}
-.toast.show { opacity: 1; transform: none; }
-.toast.good { border-color: rgba(91,141,239,.4); }
+/* URL MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.modal-overlay.hidden { display: none; }
+.modal { background: var(--panel); border: 1px solid var(--border2); border-radius: 12px; padding: 28px; width: 100%; max-width: 460px; }
+.modal-title { font-family: 'Syne', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--dim); margin-bottom: 18px; }
+.modal-game { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 18px; }
+.modal-input { width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: 7px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: .9rem; padding: 10px 14px; outline: none; margin-bottom: 8px; transition: border-color .2s; }
+.modal-input:focus { border-color: var(--accent); }
+.modal-input::placeholder { color: var(--dim); opacity: .5; }
+.modal-preview { width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: var(--bg); border: 1px solid var(--border); margin-bottom: 18px; display: flex; align-items: center; justify-content: center; }
+.modal-preview img { width: 100%; height: 100%; object-fit: contain; display: none; }
+.modal-preview .no-prev { font-size: .78rem; color: var(--dim); opacity: .5; }
+.modal-btns { display: flex; gap: 10px; justify-content: flex-end; }
+.modal-save { font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 9px 20px; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: opacity .2s; }
+.modal-save:hover { opacity: .85; }
+.modal-clear { font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 9px 16px; background: transparent; color: var(--dim); border: 1px solid var(--border2); border-radius: 6px; cursor: pointer; transition: all .2s; }
+.modal-clear:hover { color: var(--danger); border-color: rgba(192,84,74,.4); }
+.modal-cancel { font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 9px 16px; background: transparent; color: var(--dim); border: none; cursor: pointer; }
+.modal-cancel:hover { color: var(--text); }
 
-.empty-state {
-  text-align: center;
-  padding: 20px;
-  color: var(--dim);
-  font-size: .82rem;
-}
+/* TOAST */
+.toast { position: fixed; bottom: 24px; right: 24px; z-index: 200; background: var(--panel); border: 1px solid var(--border2); border-radius: 8px; padding: 11px 18px; font-size: .82rem; color: var(--text); font-weight: 500; box-shadow: 0 8px 32px rgba(0,0,0,.5); pointer-events: none; opacity: 0; transform: translateY(6px); transition: all .25s; }
+.toast.show { opacity: 1; transform: none; }
+
+.empty-state { text-align: center; padding: 20px; color: var(--dim); font-size: .82rem; }
 </style>
 </head>
 <body>
+
+<!-- Setup warning -->
+<div class="setup-banner" id="setup-banner">
+  ⚠️ Firebase не настроен. Следуй инструкции в HTML-файле, чтобы данные были общими.
+  До настройки всё работает локально.
+</div>
 
 <header class="site-header">
   <div>
@@ -477,7 +388,7 @@ body {
   <div class="header-stat">
     <div class="big"><span id="h-owned">0</span> / <span id="h-total">0</span></div>
     <div class="lbl">игр имеется</div>
-    <div class="progress-line"><div class="progress-fill" id="h-bar" style="width:0%"></div></div>
+    <div class="prog-line"><div class="prog-fill" id="h-bar" style="width:0%"></div></div>
   </div>
 </header>
 
@@ -488,24 +399,23 @@ body {
 
 <main class="main">
   <div class="panel on" id="p-col">
-    <div id="groot"></div>
+    <div id="groot">
+      <div class="loading-state"><div class="spinner"></div><span>Загружаем коллекцию...</span></div>
+    </div>
   </div>
-
   <div class="panel" id="p-adm">
     <div class="adm-grid">
       <div class="adm-block">
-        <div class="adm-block-title">Список игр</div>
+        <div class="adm-title">Список игр</div>
         <input class="adm-search" id="asearch" type="text" placeholder="Поиск...">
         <div class="adm-list" id="alist"></div>
       </div>
-
       <div class="adm-block">
-        <div class="adm-block-title">Добавить игру</div>
+        <div class="adm-title">Добавить игру</div>
         <div class="add-grid">
           <div class="field"><label>Название</label><input id="fn" type="text" placeholder="Sonic the Hedgehog"></div>
           <div class="field"><label>Год</label><input id="fy" type="text" placeholder="1991"></div>
           <div class="field"><label>Платформа</label><input id="fp" type="text" placeholder="Genesis, PS4..."></div>
-          <div class="field"><label>URL обложки</label><input id="fc" type="text" placeholder="https://..."></div>
           <div class="field">
             <label>Раздел</label>
             <select id="fs">
@@ -524,12 +434,12 @@ body {
               <option value="other">Другое</option>
             </select>
           </div>
+          <div class="field span2"><label>URL обложки (необязательно)</label><input id="furl" type="text" placeholder="https://..."></div>
         </div>
         <button class="btn-add" id="badd">Добавить</button>
       </div>
-
       <div class="adm-block">
-        <div class="adm-block-title">Сброс данных</div>
+        <div class="adm-title">Сброс данных</div>
         <div class="danger-row">
           <button class="btn-dng" id="bro">Сбросить галочки</button>
           <button class="btn-dng" id="bra">Сбросить всё</button>
@@ -539,80 +449,124 @@ body {
   </div>
 </main>
 
+<!-- URL Cover Modal -->
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal">
+    <div class="modal-title">Обложка игры</div>
+    <div class="modal-game" id="modal-gname"></div>
+    <input class="modal-input" id="modal-url" type="text" placeholder="https://example.com/cover.jpg">
+    <div class="modal-preview">
+      <img id="modal-preview-img" alt="preview">
+      <div class="no-prev" id="modal-no-prev">Введи URL для предпросмотра</div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-clear" id="modal-clear">Удалить обложку</button>
+      <button class="modal-cancel" id="modal-cancel">Отмена</button>
+      <button class="modal-save" id="modal-save">Сохранить</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 <script>
+// ── DEFAULT GAME DATA ─────────────────────────────────────────────────────
 var DEFAULTS = [
-  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',   sec:'genesis',   cover:'https://static.wikia.nocookie.net/sonic/images/e/e9/Sonic1_box_usa.jpg/revision/latest/scale-to-width-down/1200?cb=20251109031210'},
-  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',   sec:'genesis',   cover:'https://howlongtobeat.com/games/8788_Sonic_the_Hedgehog_2.jpg'},
-  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',   sec:'genesis',   cover:'https://static.wikia.nocookie.net/sonic/images/4/40/Sonic_the_Hedgehog_CD_cover_1.jpg/revision/latest?cb=20190923133259&path-prefix=ru'},
-  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',   sec:'genesis',   cover:'https://static.wikia.nocookie.net/sonic/images/7/71/Sonic3cover.png/revision/latest?cb=20110614224146'},
-  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',   sec:'genesis',   cover:'https://static.wikia.nocookie.net/sonic/images/6/62/Sonic_%26_Knuckles_%28US%29.jpg/revision/latest/scale-to-width-down/1200?cb=20230828050034'},
-  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',   sec:'genesis',   cover:'https://static.wikia.nocookie.net/sonic/images/e/ea/Sonic_3D_Blast_%28U%29_Front.jpg/revision/latest/scale-to-width-down/1200?cb=20160611143631'},
-  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', sec:'dreamcast', cover:'https://upload.wikimedia.org/wikipedia/ru/d/d5/Sonic_Adventure_coverart.jpg'},
-  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', sec:'dreamcast', cover:'https://upload.wikimedia.org/wikipedia/ru/0/0d/Sonic_Adventure_2_coverart.jpg'},
-  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',   sec:'dreamcast', cover:'https://static.wikia.nocookie.net/sonic/images/c/c2/Sonic_Heroes.jpg/revision/latest?cb=20190326035830'},
-  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',   sec:'dreamcast', cover:'https://upload.wikimedia.org/wikipedia/ru/thumb/7/72/Shadow_the_Hedgehog_coverart.jpg/330px-Shadow_the_Hedgehog_coverart.jpg'},
-  {id:'c71',  name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',   sec:'7thgen',    cover:'https://upload.wikimedia.org/wikipedia/ru/0/00/Sonic-the-hedgehog-2006-xbox360.jpg'},
-  {id:'c72',  name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',   sec:'7thgen',    cover:'https://upload.wikimedia.org/wikipedia/ru/5/57/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_%D0%B8%D0%B3%D1%80%D1%8B_Sonic_Unleashed.jpg'},
-  {id:'c73',  name:'Sonic Colors',                  year:'2010', plat:'Wii',       sec:'7thgen',    cover:'https://upload.wikimedia.org/wikipedia/ru/0/02/Sonic_Colors.jpg'},
-  {id:'c74',  name:'Sonic Generations',             year:'2011', plat:'PS3/360',   sec:'7thgen',    cover:'https://static.wikia.nocookie.net/sonic/images/d/d6/Sonic_Generations.jpg/revision/latest?cb=20191004103644'},
-  {id:'c75',  name:'Sonic Lost World',              year:'2013', plat:'Wii U',     sec:'7thgen',    cover:'https://upload.wikimedia.org/wikipedia/ru/c/c7/Sonic_Lost_World_coverart.jpg'},
-  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     sec:'modern',    cover:'https://upload.wikimedia.org/wikipedia/ru/e/e1/Sonic_Forces_coverart.jpg'},
-  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     sec:'modern',    cover:'https://upload.wikimedia.org/wikipedia/en/0/0f/SonicFrontiersCoverArt.jpg'},
-  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     sec:'modern',    cover:'https://upload.wikimedia.org/wikipedia/ru/f/fb/Sonic_Superstars_Cover_Art_Square.png'},
-  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     sec:'remaster',  cover:'https://static.wikia.nocookie.net/sonic/images/2/22/SCU_cover.jpg/revision/latest?cb=20210608120729&path-prefix=ru'},
-  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     sec:'remaster',  cover:'https://static.wikia.nocookie.net/sonic/images/4/47/Sonic_Origins_Cover.png/revision/latest?cb=20220719123915&path-prefix=ru'},
-  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     sec:'remaster',  cover:''},
-  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear', sec:'gamegear',  cover:'https://static.wikia.nocookie.net/sonic/images/2/27/Sonic_Chaos_boxart_NA.jpg/revision/latest/scale-to-width-down/1200?cb=20240326071102'},
-  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear', sec:'gamegear',  cover:'https://static.wikia.nocookie.net/sonic/images/e/e0/Sonic_Triple_Trouble_GG_US.jpg/revision/latest?cb=20201106071630'},
-  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear', sec:'gamegear',  cover:'https://static.wikia.nocookie.net/sonic/images/a/a4/SonicLabyrinthBoxArt.jpg/revision/latest?cb=20131007030715'},
-  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear', sec:'gamegear',  cover:'https://static.wikia.nocookie.net/sonic/images/6/64/SB_%D0%90%D0%BC%D0%B5%D1%80%D0%B8%D0%BA%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0.png/revision/latest?cb=20190712181208&path-prefix=ru'},
-  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',       sec:'gba',       cover:'https://upload.wikimedia.org/wikipedia/ru/a/a8/Sonic_Advance_Coverart.png'},
-  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',       sec:'gba',       cover:'https://upload.wikimedia.org/wikipedia/ru/a/a1/Sonic_Advance_2_Coverart.png'},
-  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',       sec:'gba',       cover:'https://upload.wikimedia.org/wikipedia/ru/c/cd/Sonic_Advance_3_Coverart.png'},
-  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',       sec:'gba',       cover:'https://upload.wikimedia.org/wikipedia/ru/f/f0/Sonic_Battle_Box.jpg'},
-  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',        sec:'ds',        cover:'https://upload.wikimedia.org/wikipedia/ru/5/50/Sonic_Rush_Coverart.png'},
-  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',        sec:'ds',        cover:'https://upload.wikimedia.org/wikipedia/ru/2/21/%D0%A4%D0%B0%D0%B9%D0%BB-Sonic_Rush_Adventure_boxart.jpg'},
-  {id:'ds3',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',       sec:'ds',        cover:'https://static.wikia.nocookie.net/sonic/images/8/8a/SonicLostWorld3DSBox.jpg/revision/latest?cb=20150322201407'},
-  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',       sec:'wii',       cover:'https://upload.wikimedia.org/wikipedia/ru/8/89/Sonic_and_the_Secret_Rings_Box.jpg'},
-  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',       sec:'wii',       cover:'https://upload.wikimedia.org/wikipedia/ru/e/e3/Sonic_and_the_Black_Knight_Cover.jpg'},
-  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',     sec:'racing',    cover:'https://upload.wikimedia.org/wikipedia/ru/2/2a/Sonic_Riders_coverart.jpg'},
-  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',     sec:'racing',    cover:'https://upload.wikimedia.org/wikipedia/ru/3/38/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_%D0%B8%D0%B3%D1%80%D1%8B_Sonic_Riders_Zero_Gravity.jpg'},
-  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',  sec:'racing',    cover:'https://upload.wikimedia.org/wikipedia/ru/3/3f/Sonic_Free_Riders_Box_Artwork.jpg'},
-  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     sec:'racing',    cover:'https://upload.wikimedia.org/wikipedia/ru/b/b6/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_%D0%B8%D0%B3%D1%80%D1%8B_Sonic_%26_SEGA_All-Stars_Racing.jpg'},
-  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     sec:'racing',    cover:'https://upload.wikimedia.org/wikipedia/ru/9/9b/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_%D0%B8%D0%B3%D1%80%D1%8B_Sonic_and_All-Stars_Racing_Transformed.jpg'},
-  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     sec:'racing',    cover:'https://upload.wikimedia.org/wikipedia/ru/5/57/Team_Sonic_Racing_coverart.jpg'},
-  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     sec:'mania',     cover:''},
-  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     sec:'mania',     cover:'https://upload.wikimedia.org/wikipedia/ru/7/72/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_%D0%B8%D0%B3%D1%80%D1%8B_Sonic_Mania_Plus.jpg'},
-  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',    sec:'mobile',    cover:''},
-  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',    sec:'mobile',    cover:''},
-  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',    sec:'mobile',    cover:''}
+  {id:'sg1',  name:'Sonic the Hedgehog',            year:'1991', plat:'Genesis',   sec:'genesis',   coverUrl:''},
+  {id:'sg2',  name:'Sonic the Hedgehog 2',          year:'1992', plat:'Genesis',   sec:'genesis',   coverUrl:''},
+  {id:'sg3',  name:'Sonic CD',                      year:'1993', plat:'Sega CD',   sec:'genesis',   coverUrl:''},
+  {id:'sg4',  name:'Sonic the Hedgehog 3',          year:'1994', plat:'Genesis',   sec:'genesis',   coverUrl:''},
+  {id:'sg5',  name:'Sonic & Knuckles',              year:'1994', plat:'Genesis',   sec:'genesis',   coverUrl:''},
+  {id:'sg6',  name:'Sonic 3D Blast',                year:'1996', plat:'Genesis',   sec:'genesis',   coverUrl:''},
+  {id:'dc1',  name:'Sonic Adventure',               year:'1998', plat:'Dreamcast', sec:'dreamcast', coverUrl:''},
+  {id:'dc2',  name:'Sonic Adventure 2',             year:'2001', plat:'Dreamcast', sec:'dreamcast', coverUrl:''},
+  {id:'dc3',  name:'Sonic Heroes',                  year:'2003', plat:'PS2/GCN',   sec:'dreamcast', coverUrl:''},
+  {id:'dc4',  name:'Shadow the Hedgehog',           year:'2005', plat:'PS2/GCN',   sec:'dreamcast', coverUrl:''},
+  {id:'c71',  name:'Sonic the Hedgehog (2006)',     year:'2006', plat:'PS3/360',   sec:'7thgen',    coverUrl:''},
+  {id:'c72',  name:'Sonic Unleashed',               year:'2008', plat:'PS3/360',   sec:'7thgen',    coverUrl:''},
+  {id:'c73',  name:'Sonic Colors',                  year:'2010', plat:'Wii',       sec:'7thgen',    coverUrl:''},
+  {id:'c74',  name:'Sonic Generations',             year:'2011', plat:'PS3/360',   sec:'7thgen',    coverUrl:''},
+  {id:'c75',  name:'Sonic Lost World',              year:'2013', plat:'Wii U',     sec:'7thgen',    coverUrl:''},
+  {id:'mod1', name:'Sonic Forces',                  year:'2017', plat:'Multi',     sec:'modern',    coverUrl:''},
+  {id:'mod2', name:'Sonic Frontiers',               year:'2022', plat:'Multi',     sec:'modern',    coverUrl:''},
+  {id:'mod3', name:'Sonic Superstars',              year:'2023', plat:'Multi',     sec:'modern',    coverUrl:''},
+  {id:'rem1', name:'Sonic Colors: Ultimate',        year:'2021', plat:'Multi',     sec:'remaster',  coverUrl:''},
+  {id:'rem2', name:'Sonic Origins',                 year:'2022', plat:'Multi',     sec:'remaster',  coverUrl:''},
+  {id:'rem3', name:'Sonic Origins Plus',            year:'2023', plat:'Multi',     sec:'remaster',  coverUrl:''},
+  {id:'hh1',  name:'Sonic Chaos',                   year:'1993', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
+  {id:'hh2',  name:'Sonic Triple Trouble',          year:'1994', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
+  {id:'hh3',  name:'Sonic Labyrinth',               year:'1995', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
+  {id:'hh4',  name:'Sonic Blast',                   year:'1996', plat:'Game Gear', sec:'gamegear',  coverUrl:''},
+  {id:'gba1', name:'Sonic Advance',                 year:'2001', plat:'GBA',       sec:'gba',       coverUrl:''},
+  {id:'gba2', name:'Sonic Advance 2',               year:'2002', plat:'GBA',       sec:'gba',       coverUrl:''},
+  {id:'gba3', name:'Sonic Advance 3',               year:'2004', plat:'GBA',       sec:'gba',       coverUrl:''},
+  {id:'gba4', name:'Sonic Battle',                  year:'2003', plat:'GBA',       sec:'gba',       coverUrl:''},
+  {id:'ds1',  name:'Sonic Rush',                    year:'2005', plat:'DS',        sec:'ds',        coverUrl:''},
+  {id:'ds2',  name:'Sonic Rush Adventure',          year:'2007', plat:'DS',        sec:'ds',        coverUrl:''},
+  {id:'ds3',  name:'Sonic Lost World (3DS)',        year:'2013', plat:'3DS',       sec:'ds',        coverUrl:''},
+  {id:'wii1', name:'Sonic and the Secret Rings',    year:'2007', plat:'Wii',       sec:'wii',       coverUrl:''},
+  {id:'wii2', name:'Sonic and the Black Knight',    year:'2009', plat:'Wii',       sec:'wii',       coverUrl:''},
+  {id:'sp1',  name:'Sonic Riders',                  year:'2006', plat:'Multi',     sec:'racing',    coverUrl:''},
+  {id:'sp2',  name:'Sonic Riders: Zero Gravity',    year:'2008', plat:'Multi',     sec:'racing',    coverUrl:''},
+  {id:'sp3',  name:'Sonic Free Riders',             year:'2010', plat:'Xbox 360',  sec:'racing',    coverUrl:''},
+  {id:'sp4',  name:'Sonic & Sega All-Stars Racing', year:'2010', plat:'Multi',     sec:'racing',    coverUrl:''},
+  {id:'sp5',  name:'All-Stars Racing Transformed',  year:'2012', plat:'Multi',     sec:'racing',    coverUrl:''},
+  {id:'sp6',  name:'Team Sonic Racing',             year:'2019', plat:'Multi',     sec:'racing',    coverUrl:''},
+  {id:'ind1', name:'Sonic Mania',                   year:'2017', plat:'Multi',     sec:'mania',     coverUrl:''},
+  {id:'ind2', name:'Sonic Mania Plus',              year:'2018', plat:'Multi',     sec:'mania',     coverUrl:''},
+  {id:'mob1', name:'Sonic Dash',                    year:'2013', plat:'Mobile',    sec:'mobile',    coverUrl:''},
+  {id:'mob2', name:'Sonic Forces: Speed Battle',    year:'2017', plat:'Mobile',    sec:'mobile',    coverUrl:''},
+  {id:'mob3', name:'Sonic Jump',                    year:'2012', plat:'Mobile',    sec:'mobile',    coverUrl:''}
 ];
 
 var SEC_LABEL = {
   genesis:'Sega Genesis', dreamcast:'Dreamcast / GameCube', '7thgen':'7th Gen Consoles',
   modern:'Modern', remaster:'Remasters', gamegear:'Game Gear', gba:'Game Boy Advance',
-  ds:'DS / 3DS', wii:'Wii', racing:'Racing & Spin-offs', mania:'Sonic Mania', mobile:'Mobile', other:'Other'
+  ds:'DS / 3DS', wii:'Wii', racing:'Racing & Spin-offs', mania:'Sonic Mania',
+  mobile:'Mobile', other:'Other'
 };
 var SEC_ORDER = ['genesis','dreamcast','7thgen','modern','remaster','gamegear','gba','ds','wii','racing','mania','mobile','other'];
 
+// ── FIREBASE INIT ─────────────────────────────────────────────────────────
+var firebaseReady = false;
+var dbRef = null;
+
+var isConfigured = FIREBASE_CONFIG.apiKey !== 'REPLACE_WITH_YOUR_API_KEY';
+
+if (isConfigured) {
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    dbRef = firebase.database();
+    firebaseReady = true;
+    document.getElementById('setup-banner').classList.add('hidden');
+  } catch(e) {
+    console.warn('Firebase init failed, using local mode', e);
+  }
+}
+
+// ── LOCAL FALLBACK ────────────────────────────────────────────────────────
 function lsGet(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e) { return d; } }
-function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { showToast('Ошибка сохранения'); } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
 
-var games = lsGet('rcol_g', null);
-if (!games) { games = JSON.parse(JSON.stringify(DEFAULTS)); lsSet('rcol_g', games); }
-var owned = lsGet('rcol_o', []);
+// ── STATE (in-memory, kept in sync) ──────────────────────────────────────
+var games = [];   // array
+var owned = {};   // {id: true}
 
+// ── TOAST ─────────────────────────────────────────────────────────────────
 var _tt = null;
-function showToast(msg, good) {
+function showToast(msg) {
   var el = document.getElementById('toast');
   el.textContent = msg;
-  el.className = 'toast show' + (good ? ' good' : '');
+  el.classList.add('show');
   clearTimeout(_tt);
   _tt = setTimeout(function() { el.classList.remove('show'); }, 2200);
 }
 
+// ── TABS ──────────────────────────────────────────────────────────────────
 document.querySelectorAll('.nav-tab').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('on'); });
@@ -623,44 +577,190 @@ document.querySelectorAll('.nav-tab').forEach(function(btn) {
   });
 });
 
-function makePh(game) {
-  var d = document.createElement('div'); d.className = 'gph';
-  var ico = document.createElement('div'); ico.className = 'gph-icon'; ico.textContent = '◈';
-  var nm = document.createElement('div'); nm.className = 'gph-name'; nm.textContent = game.name;
-  d.appendChild(ico); d.appendChild(nm);
-  return d;
-}
-
-function fillCover(wrap, game) {
-  var dot = wrap.querySelector('.owned-dot');
-  Array.from(wrap.childNodes).forEach(function(n) { if (n !== dot) wrap.removeChild(n); });
-  if (game.cover) {
-    var img = document.createElement('img');
-    img.src = game.cover;
-    img.alt = game.name;
-    img.onerror = function() {
-      if (img.parentNode === wrap) {
-        wrap.removeChild(img);
-        wrap.insertBefore(makePh(game), dot);
-      }
-    };
-    wrap.insertBefore(img, dot);
+// ── DB HELPERS ────────────────────────────────────────────────────────────
+function dbWrite(path, value, cb) {
+  if (firebaseReady) {
+    dbRef.ref(path).set(value).then(function() { cb && cb(); }).catch(function(e) { console.error(e); cb && cb(); });
   } else {
-    wrap.insertBefore(makePh(game), dot);
+    lsSet('local_' + path.replace(/\//g,'_'), value);
+    cb && cb();
+  }
+}
+function dbUpdate(path, value, cb) {
+  if (firebaseReady) {
+    dbRef.ref(path).update(value).then(function() { cb && cb(); }).catch(function(e) { console.error(e); cb && cb(); });
+  } else {
+    var cur = lsGet('local_' + path.replace(/\//g,'_'), {});
+    Object.assign(cur, value);
+    lsSet('local_' + path.replace(/\//g,'_'), cur);
+    cb && cb();
+  }
+}
+function dbRemove(path, cb) {
+  if (firebaseReady) {
+    dbRef.ref(path).remove().then(function() { cb && cb(); }).catch(function() { cb && cb(); });
+  } else {
+    var key = 'local_' + path.replace(/\//g,'_');
+    localStorage.removeItem(key);
+    cb && cb();
   }
 }
 
+// ── SUBSCRIBE TO REALTIME CHANGES ─────────────────────────────────────────
+function subscribeToData() {
+  if (firebaseReady) {
+    // Games
+    dbRef.ref('games').on('value', function(snap) {
+      var val = snap.val();
+      if (val) {
+        games = Object.values(val);
+      } else {
+        // First run: seed defaults
+        var obj = {};
+        DEFAULTS.forEach(function(g) { obj[g.id] = g; });
+        dbRef.ref('games').set(obj);
+        games = DEFAULTS.slice();
+      }
+      renderCol();
+      if (document.getElementById('p-adm').classList.contains('on')) {
+        renderAdmin(document.getElementById('asearch').value);
+      }
+    });
+    // Owned
+    dbRef.ref('owned').on('value', function(snap) {
+      owned = snap.val() || {};
+      renderCol();
+      if (document.getElementById('p-adm').classList.contains('on')) {
+        renderAdmin(document.getElementById('asearch').value);
+      }
+    });
+  } else {
+    // Local mode
+    games = lsGet('local_games', null);
+    if (!games) { games = DEFAULTS.slice(); lsSet('local_games', games); }
+    owned = lsGet('local_owned', {});
+    renderCol();
+  }
+}
+
+// ── SAVE HELPERS ──────────────────────────────────────────────────────────
+function saveGame(game, cb) {
+  if (firebaseReady) {
+    dbRef.ref('games/' + game.id).set(game).then(function() { cb && cb(); }).catch(function() { cb && cb(); });
+  } else {
+    var idx = games.findIndex(function(g) { return g.id === game.id; });
+    if (idx !== -1) games[idx] = game; else games.push(game);
+    lsSet('local_games', games);
+    cb && cb();
+  }
+}
+function deleteGame(id, cb) {
+  if (firebaseReady) {
+    dbRef.ref('games/' + id).remove().then(function() {
+      dbRef.ref('owned/' + id).remove().then(function() { cb && cb(); });
+    }).catch(function() { cb && cb(); });
+  } else {
+    games = games.filter(function(g) { return g.id !== id; });
+    delete owned[id];
+    lsSet('local_games', games);
+    lsSet('local_owned', owned);
+    cb && cb();
+  }
+}
+function setOwned(id, val, cb) {
+  if (firebaseReady) {
+    if (val) {
+      dbRef.ref('owned/' + id).set(true).then(function() { cb && cb(); });
+    } else {
+      dbRef.ref('owned/' + id).remove().then(function() { cb && cb(); });
+    }
+  } else {
+    if (val) owned[id] = true; else delete owned[id];
+    lsSet('local_owned', owned);
+    cb && cb();
+  }
+}
+function clearOwned(cb) {
+  if (firebaseReady) {
+    dbRef.ref('owned').remove().then(function() { cb && cb(); });
+  } else {
+    owned = {}; lsSet('local_owned', owned); cb && cb();
+  }
+}
+function resetAll(cb) {
+  if (firebaseReady) {
+    var obj = {};
+    DEFAULTS.forEach(function(g) { obj[g.id] = g; });
+    dbRef.ref('games').set(obj).then(function() {
+      dbRef.ref('owned').remove().then(function() { cb && cb(); });
+    });
+  } else {
+    games = DEFAULTS.slice(); owned = {};
+    lsSet('local_games', games); lsSet('local_owned', owned); cb && cb();
+  }
+}
+
+// ── RENDER COLLECTION ─────────────────────────────────────────────────────
+function renderCol() {
+  var root = document.getElementById('groot');
+  root.innerHTML = '';
+
+  var grouped = {};
+  games.forEach(function(g) {
+    var s = g.sec || 'other';
+    if (!grouped[s]) grouped[s] = [];
+    grouped[s].push(g);
+  });
+
+  var first = true;
+  SEC_ORDER.forEach(function(sec) {
+    if (!grouped[sec] || !grouped[sec].length) return;
+    var secGames = grouped[sec];
+    var secOwnedCount = secGames.filter(function(g) { return owned[g.id]; }).length;
+
+    var head = document.createElement('div'); head.className = 'sec-head';
+    if (!first) head.style.marginTop = '36px';
+    first = false;
+    var nm = document.createElement('div'); nm.className = 'sec-name'; nm.textContent = SEC_LABEL[sec] || sec;
+    var line = document.createElement('div'); line.className = 'sec-line';
+    var cnt = document.createElement('div'); cnt.className = 'sec-count'; cnt.textContent = secOwnedCount + ' / ' + secGames.length;
+    head.appendChild(nm); head.appendChild(line); head.appendChild(cnt);
+    root.appendChild(head);
+
+    var grid = document.createElement('div'); grid.className = 'game-grid';
+    secGames.forEach(function(g) { grid.appendChild(makeCard(g)); });
+    root.appendChild(grid);
+  });
+
+  updateStats();
+}
+
 function makeCard(game) {
-  var isOwned = owned.indexOf(game.id) !== -1;
+  var isOwned = !!owned[game.id];
   var card = document.createElement('div');
   card.className = 'gcard' + (isOwned ? ' owned' : '');
   card.id = 'gc-' + game.id;
 
+  // Cover
   var cov = document.createElement('div'); cov.className = 'gcover';
-  var dot = document.createElement('div'); dot.className = 'owned-dot';
-  cov.appendChild(dot);
-  fillCover(cov, game);
+  var badge = document.createElement('div'); badge.className = 'owned-badge'; badge.textContent = '✓';
+  if (game.coverUrl && game.coverUrl.trim()) {
+    var img = document.createElement('img');
+    img.src = game.coverUrl;
+    img.alt = game.name;
+    img.onerror = function() {
+      if (img.parentNode === cov) {
+        cov.removeChild(img);
+        cov.insertBefore(makePh(game), badge);
+      }
+    };
+    cov.appendChild(img);
+  } else {
+    cov.appendChild(makePh(game));
+  }
+  cov.appendChild(badge);
 
+  // Info
   var inf = document.createElement('div'); inf.className = 'ginfo';
   var nm = document.createElement('div'); nm.className = 'gname'; nm.textContent = game.name;
   var meta = document.createElement('div'); meta.className = 'gmeta';
@@ -674,66 +774,36 @@ function makeCard(game) {
   return card;
 }
 
-function renderCol() {
-  var root = document.getElementById('groot');
-  root.innerHTML = '';
-  var grouped = {};
-  games.forEach(function(g) {
-    var s = g.sec || 'other';
-    if (!grouped[s]) grouped[s] = [];
-    grouped[s].push(g);
-  });
-  var first = true;
-  SEC_ORDER.forEach(function(sec) {
-    if (!grouped[sec] || !grouped[sec].length) return;
-    var h = document.createElement('div'); h.className = 'sec-head';
-    if (!first) h.style.marginTop = '36px';
-    first = false;
-    var nm = document.createElement('div'); nm.className = 'sec-name'; nm.textContent = SEC_LABEL[sec] || sec;
-    var line = document.createElement('div'); line.className = 'sec-line';
-    var cnt = document.createElement('div'); cnt.className = 'sec-count';
-    var secOwned = grouped[sec].filter(function(g) { return owned.indexOf(g.id) !== -1; }).length;
-    cnt.textContent = secOwned + ' / ' + grouped[sec].length;
-    h.appendChild(nm); h.appendChild(line); h.appendChild(cnt);
-    root.appendChild(h);
-    var grid = document.createElement('div'); grid.className = 'game-grid';
-    grouped[sec].forEach(function(g) { grid.appendChild(makeCard(g)); });
-    root.appendChild(grid);
-  });
-  updateStats();
+function makePh(game) {
+  var d = document.createElement('div'); d.className = 'gph';
+  var ico = document.createElement('div'); ico.className = 'gph-icon'; ico.textContent = '◈';
+  var nm = document.createElement('div'); nm.className = 'gph-name'; nm.textContent = game.name;
+  d.appendChild(ico); d.appendChild(nm);
+  return d;
 }
 
 function toggleOwned(id) {
-  var idx = owned.indexOf(id);
-  if (idx === -1) owned.push(id); else owned.splice(idx, 1);
-  lsSet('rcol_o', owned);
-  var isOn = owned.indexOf(id) !== -1;
+  var wasOwned = !!owned[id];
+  // Optimistic UI
+  if (wasOwned) delete owned[id]; else owned[id] = true;
   var card = document.getElementById('gc-' + id);
-  if (card) card.classList.toggle('owned', isOn);
-  var tog = document.getElementById('at-' + id);
-  if (tog) tog.checked = isOn;
+  if (card) card.classList.toggle('owned', !wasOwned);
   updateStats();
-  renderSecCounts();
-}
-
-function renderSecCounts() {
-  var grouped = {};
-  games.forEach(function(g) { var s = g.sec||'other'; if(!grouped[s]) grouped[s]=[]; grouped[s].push(g); });
-  document.querySelectorAll('.sec-count').forEach(function(el, i) {
-    var sec = SEC_ORDER.filter(function(s) { return grouped[s] && grouped[s].length; })[i];
-    if (!sec) return;
-    var secOwned = grouped[sec].filter(function(g) { return owned.indexOf(g.id) !== -1; }).length;
-    el.textContent = secOwned + ' / ' + grouped[sec].length;
+  // Sync
+  setOwned(id, !wasOwned, function() {
+    if (!firebaseReady) renderCol(); // local mode re-render
   });
 }
 
 function updateStats() {
-  var total = games.length, count = owned.length;
+  var total = games.length;
+  var count = Object.keys(owned).length;
   document.getElementById('h-owned').textContent = count;
   document.getElementById('h-total').textContent = total;
-  document.getElementById('h-bar').style.width = (total ? (count/total*100).toFixed(1) : 0) + '%';
+  document.getElementById('h-bar').style.width = (total ? (count / total * 100).toFixed(1) : 0) + '%';
 }
 
+// ── ADMIN ─────────────────────────────────────────────────────────────────
 function renderAdmin(filter) {
   var list = document.getElementById('alist');
   list.innerHTML = '';
@@ -746,43 +816,51 @@ function renderAdmin(filter) {
   shown.forEach(function(game) {
     var row = document.createElement('div'); row.className = 'adm-row';
 
+    // Thumb
     var thumb = document.createElement('div'); thumb.className = 'adm-thumb';
-    if (game.cover) {
-      var ti = document.createElement('img');
-      ti.src = game.cover;
-      ti.alt = game.name;
+    if (game.coverUrl && game.coverUrl.trim()) {
+      var ti = document.createElement('img'); ti.src = game.coverUrl;
+      ti.onerror = function() { ti.style.display = 'none'; thumb.textContent = '◈'; };
       thumb.appendChild(ti);
     } else {
       thumb.textContent = '◈';
     }
 
+    // Info
     var inf = document.createElement('div'); inf.className = 'adm-inf';
     var anm = document.createElement('div'); anm.className = 'adm-name'; anm.textContent = game.name;
-    var sub = document.createElement('div'); sub.className = 'adm-sub';
-    sub.textContent = game.year + ' · ' + game.plat + (game.cover ? ' · URL задан' : ' · URL пустой');
+    var sub = document.createElement('div'); sub.className = 'adm-sub'; sub.textContent = game.year + ' · ' + game.plat;
     inf.appendChild(anm); inf.appendChild(sub);
 
+    // Actions
     var acts = document.createElement('div'); acts.className = 'adm-acts';
 
+    // URL button
+    var urlBtn = document.createElement('button');
+    urlBtn.className = 'btn-url' + (game.coverUrl ? ' has-cover' : '');
+    urlBtn.textContent = game.coverUrl ? '🖼 URL' : '+ URL';
+    urlBtn.addEventListener('click', function() { openModal(game); });
+
+    // Toggle owned
     var tl = document.createElement('label'); tl.className = 'tog';
     var ti2 = document.createElement('input'); ti2.type = 'checkbox'; ti2.id = 'at-' + game.id;
-    ti2.checked = owned.indexOf(game.id) !== -1;
+    ti2.checked = !!owned[game.id];
     ti2.addEventListener('change', function() { toggleOwned(game.id); });
     var tb = document.createElement('div'); tb.className = 'tog-track';
     var tlb = document.createElement('span'); tlb.className = 'tog-lbl'; tlb.textContent = 'есть';
     tl.appendChild(ti2); tl.appendChild(tb); tl.appendChild(tlb);
 
+    // Delete
     var del = document.createElement('button'); del.className = 'btn-del'; del.textContent = '✕';
     del.addEventListener('click', function() {
       if (!confirm('Удалить «' + game.name + '»?')) return;
-      games = games.filter(function(g) { return g.id !== game.id; });
-      owned = owned.filter(function(i) { return i !== game.id; });
-      lsSet('rcol_g', games); lsSet('rcol_o', owned);
-      renderCol(); renderAdmin(document.getElementById('asearch').value);
-      showToast('Удалено: ' + game.name);
+      deleteGame(game.id, function() {
+        if (!firebaseReady) { renderCol(); renderAdmin(document.getElementById('asearch').value); }
+        showToast('Удалено: ' + game.name);
+      });
     });
 
-    acts.appendChild(tl); acts.appendChild(del);
+    acts.appendChild(urlBtn); acts.appendChild(tl); acts.appendChild(del);
     row.appendChild(thumb); row.appendChild(inf); row.appendChild(acts);
     list.appendChild(row);
   });
@@ -790,44 +868,103 @@ function renderAdmin(filter) {
 
 document.getElementById('asearch').addEventListener('input', function() { renderAdmin(this.value); });
 
+// ── URL COVER MODAL ───────────────────────────────────────────────────────
+var modalGameId = null;
+
+function openModal(game) {
+  modalGameId = game.id;
+  document.getElementById('modal-gname').textContent = game.name;
+  document.getElementById('modal-url').value = game.coverUrl || '';
+  updatePreview(game.coverUrl || '');
+  document.getElementById('modal').classList.remove('hidden');
+}
+function closeModal() {
+  document.getElementById('modal').classList.add('hidden');
+  modalGameId = null;
+}
+function updatePreview(url) {
+  var img = document.getElementById('modal-preview-img');
+  var noPrev = document.getElementById('modal-no-prev');
+  if (url && url.trim()) {
+    img.src = url.trim();
+    img.style.display = 'block';
+    noPrev.style.display = 'none';
+  } else {
+    img.src = '';
+    img.style.display = 'none';
+    noPrev.style.display = 'block';
+  }
+}
+
+document.getElementById('modal-url').addEventListener('input', function() { updatePreview(this.value); });
+document.getElementById('modal-cancel').addEventListener('click', closeModal);
+document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+document.getElementById('modal-clear').addEventListener('click', function() {
+  if (!modalGameId) return;
+  var game = games.find(function(g) { return g.id === modalGameId; });
+  if (!game) return;
+  game.coverUrl = '';
+  saveGame(game, function() {
+    if (!firebaseReady) { renderCol(); renderAdmin(document.getElementById('asearch').value); }
+    showToast('Обложка удалена');
+    closeModal();
+  });
+});
+
+document.getElementById('modal-save').addEventListener('click', function() {
+  if (!modalGameId) return;
+  var url = document.getElementById('modal-url').value.trim();
+  var game = games.find(function(g) { return g.id === modalGameId; });
+  if (!game) return;
+  game.coverUrl = url;
+  saveGame(game, function() {
+    if (!firebaseReady) { renderCol(); renderAdmin(document.getElementById('asearch').value); }
+    showToast('Обложка сохранена');
+    closeModal();
+  });
+});
+
+// ── ADD GAME ──────────────────────────────────────────────────────────────
 document.getElementById('badd').addEventListener('click', function() {
   var name = document.getElementById('fn').value.trim();
   if (!name) { showToast('Введи название игры'); return; }
   var g = {
-    id:'u'+Date.now(),
-    name:name,
-    year:document.getElementById('fy').value.trim()||'—',
-    plat:document.getElementById('fp').value.trim()||'—',
-    sec:document.getElementById('fs').value,
-    cover:document.getElementById('fc').value.trim()||''
+    id: 'u' + Date.now(),
+    name: name,
+    year: document.getElementById('fy').value.trim() || '—',
+    plat: document.getElementById('fp').value.trim() || '—',
+    sec:  document.getElementById('fs').value,
+    coverUrl: document.getElementById('furl').value.trim()
   };
-  games.push(g); lsSet('rcol_g', games);
+  saveGame(g, function() {
+    if (!firebaseReady) { games.push(g); renderCol(); renderAdmin(document.getElementById('asearch').value); }
+    showToast('Добавлено: ' + g.name);
+  });
   document.getElementById('fn').value = '';
   document.getElementById('fy').value = '';
   document.getElementById('fp').value = '';
-  document.getElementById('fc').value = '';
-  renderCol(); renderAdmin(document.getElementById('asearch').value);
-  showToast('Добавлено: ' + g.name, true);
+  document.getElementById('furl').value = '';
 });
 
+// ── RESETS ────────────────────────────────────────────────────────────────
 document.getElementById('bro').addEventListener('click', function() {
   if (!confirm('Сбросить все галочки?')) return;
-  owned = []; lsSet('rcol_o', owned);
-  renderCol(); renderAdmin(document.getElementById('asearch').value);
-  showToast('Галочки сброшены');
+  clearOwned(function() {
+    if (!firebaseReady) { owned = {}; renderCol(); renderAdmin(document.getElementById('asearch').value); }
+    showToast('Галочки сброшены');
+  });
 });
-
 document.getElementById('bra').addEventListener('click', function() {
-  if (!confirm('Сбросить всё? Игры вернутся к стандартным.')) return;
-  games = JSON.parse(JSON.stringify(DEFAULTS));
-  owned = [];
-  lsSet('rcol_g', games);
-  lsSet('rcol_o', owned);
-  renderCol(); renderAdmin('');
-  showToast('Сброшено');
+  if (!confirm('Сбросить ВСЁ? Все игры вернутся к стандартным, галочки удалятся.')) return;
+  resetAll(function() {
+    if (!firebaseReady) { renderCol(); renderAdmin(''); }
+    showToast('Всё сброшено');
+  });
 });
 
-renderCol();
+// ── INIT ──────────────────────────────────────────────────────────────────
+subscribeToData();
 </script>
 </body>
 </html>
